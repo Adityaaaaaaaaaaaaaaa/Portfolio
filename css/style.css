@@ -11,7 +11,8 @@
     --border-color: #ddd;               
     --shadow-color: rgba(0, 0, 0, 0.2); 
     --scrollbar-thumb: #aaa;            
-    --scrollbar-track: #f1f1f1;         
+    --scrollbar-track: #f1f1f1; 
+    --image-hero: url('../assets/images-home/anime-deviantart-clip-art-anime-girl-def258cd35ad1c5a868465f36bf1426c.png');        
 }
 
 /* Dark Mode */
@@ -27,7 +28,8 @@
     --border-color: #7f8c8d;            
     --shadow-color: rgba(255, 255, 255, 0.1); 
     --scrollbar-thumb: #555;           
-    --scrollbar-track: #2c3e50;        
+    --scrollbar-track: #2c3e50; 
+    --image-hero: url('../assets/images-home/mecha-anime-cyborg-female-manga-a7343837fccd29ddcd9e31840bc677cc.png');        
 }
 
 /* Base Styles */
@@ -92,15 +94,26 @@ nav a:hover {
 
 /* Hero Section */
 .hero {
-    background: url('../assets/images-home/shan_cha_role.png') center/cover no-repeat;
-    height: 90vh;
+    background-image: var(--image-hero);
+    background-size: contain; /* Ensures the full image fits within the hero, without stretching */
+    background-position: center; /* Centers the image */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    height: 30rem;  /* Set to a larger height (e.g., 300px or whatever works best) */
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: var(--header-text-color);
-    padding: 20px;
+    padding: 0 20px; /* Optional padding */
     box-shadow: 0 2px 15px var(--shadow-color);
+}
+
+/* If you are using the <img> tag instead of background-image */
+.hero img {
+    height: 100%; /* Ensures the image fits the height of the hero */
+    width: auto;  /* Keeps the image’s aspect ratio */
+    object-fit: contain; /* Ensures the whole image is visible */
+    object-position: center; /* Centers the image */
 }
 
 .hero h1 {

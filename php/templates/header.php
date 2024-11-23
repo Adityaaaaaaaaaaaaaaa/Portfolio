@@ -22,10 +22,12 @@ $navLinks = [
                     echo "<li><a href='$url' class='nav-link'>$name</a></li>";
                 }
                 ?>
+                <li>
+                    <!-- Theme Toggle Button -->
+                    <div id="theme-toggle" class="theme-toggle">
+                        <button id="toggle-btn">Theme</button>
+                    </div>
+                </li>
             </ul>
-            <!-- Theme Toggle Button -->
-            <div id="theme-toggle" class="theme-toggle">
-                <button id="toggle-btn">Theme</button>
-            </div>
         </nav>
     </header>
