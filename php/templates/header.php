@@ -2,7 +2,7 @@
 <?php
 // Define the navigation links in PHP
 $navLinks = [
-    "Home" => "index.php",
+    "Home" => "home.php",
     "About" => "pages/about.php",
     "Portfolio" => "pages/portfolio.php",
     "Resume" => "pages/resume.php",
