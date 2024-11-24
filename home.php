@@ -114,7 +114,7 @@ $selectedPhrase = $phrases[$timeIndex];
     <?php include 'php/templates/header.php'; ?>
 
     <main>
-        <section class="hero">
+        <section class="hero" id="theme-image">
             <div class="hero-content">
                 <h1 class="animate__animated animate__fadeInDown intro_text"><?php echo $greeting; ?>, Welcome to My Portfolio!</h1>
                 <p class="animate__animated animate__fadeInUp intro_text"><?php echo $tagline; ?></p>

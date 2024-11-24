@@ -13,7 +13,6 @@
     --shadow-color: rgba(0, 0, 0, 0.1); 
     --scrollbar-thumb: #aaa;           
     --scrollbar-track: #f9f9f9;         
-    --image-hero: url('../assets/images-home/img\ \(2\).png');
     --intro-image-text: rgb(238, 238, 238);
     --intro-image-text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.5);
 }
@@ -33,14 +32,12 @@
     --shadow-color: rgba(255, 255, 255, 0.1); 
     --scrollbar-thumb: #555;           
     --scrollbar-track: #2c3e50; 
-    --image-hero: url('../assets/images-home/img\ \(1\).png'); 
     --intro-image-text: rgb(255, 255, 255);
     --intro-image-text-shadow: 0px 2px 2px rgb(255, 0, 0);
 }
 
 /* Hero Section */
 .hero {
-    background-image: var(--image-hero);
     background-size: contain; /* Ensures the full image fits within the hero, without stretching */
     background-position: center; /* Centers the image */
     background-repeat: no-repeat; /* Prevents the image from repeating */

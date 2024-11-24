@@ -130,6 +130,8 @@ document.addEventListener("DOMContentLoaded", () => {
         popup.classList.remove("visible");
         popup.classList.add("hidden");
         document.body.style.overflow = ""; // Re-enable background scrolling
+        popupImage.src = "";  // Clear the image source
+        popupDescription.textContent = "";  // Clear the description    
     }
 
     // Show popup on image click
@@ -155,3 +157,86 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// Arrays of images for light and dark themes
+const lightImages = [
+    'assets/images-home/img1.png', 
+    'assets/images-home/img2.png',
+    'assets/images-home/img3.png', 
+    'assets/images-home/img4.png',
+    'assets/images-home/img5.png',
+    'assets/images-home/img6.png',
+    'assets/images-home/img7.png',
+    'assets/images-home/img8.png',
+    'assets/images-home/img9.png',
+    'assets/images-home/img10.png',
+    'assets/images-home/img11.png',
+    'assets/images-home/img12.png',
+    'assets/images-home/img13.png',
+    'assets/images-home/img14.png',
+    'assets/images-home/img15.png',
+    'assets/images-home/img16.png',
+    'assets/images-home/img17.png'
+];
+
+const darkImages = [
+    'assets/images-home/img1.png',
+    'assets/images-home/img2.png',
+    'assets/images-home/img3.png',
+    'assets/images-home/img4.png',
+    'assets/images-home/img5.png',
+    'assets/images-home/img6.png',
+    'assets/images-home/img7.png',
+    'assets/images-home/img8.png',
+    'assets/images-home/img9.png',
+    'assets/images-home/img10.png',
+    'assets/images-home/img11.png',
+    'assets/images-home/img12.png',
+    'assets/images-home/img13.png',
+    'assets/images-home/img14.png',
+    'assets/images-home/img15.png',
+    'assets/images-home/img16.png',
+    'assets/images-home/img17.png'
+];
+
+// Function to randomly select an image from an array
+function getRandomImage(imagesArray) {
+    const randomIndex = Math.floor(Math.random() * imagesArray.length);
+    return imagesArray[randomIndex];
+}
+
+// Set the background image based on the current theme
+function setThemeImage() {
+    const theme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no theme is stored
+    const imageContainer = document.getElementById('theme-image');
+
+    let imagePath;
+    if (theme === 'dark') {
+        imagePath = getRandomImage(darkImages);
+    } else {
+        imagePath = getRandomImage(lightImages);
+    }
+
+    // Set the background image of the hero div
+    imageContainer.style.backgroundImage = `url(${imagePath})`;
+    imageContainer.style.backgroundSize = 'cover';
+    imageContainer.style.backgroundPosition = 'center';
+}
+
+// Handle theme toggle
+document.getElementById('toggle-btn').addEventListener('click', () => {
+    let currentTheme = localStorage.getItem('theme');
+    if (currentTheme === 'dark') {
+        currentTheme = 'light';
+    } else {
+        currentTheme = 'dark';
+    }
+
+    localStorage.setItem('theme', currentTheme); // Save the theme to local storage
+    setThemeImage(); // Set the new theme image
+});
+
+// Call setThemeImage on page load to set the initial image
+window.onload = () => {
+    setThemeImage();
+};
