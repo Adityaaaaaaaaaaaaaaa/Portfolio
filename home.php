@@ -22,6 +22,7 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script src="./js/home_animation.js"></script>
     <script src="js/dark_mode.js"></script>
+    <script src="js/mouse.js"></script>
 </head>
 <body>
     <?php include 'php/templates/header.php'; ?>
@@ -38,6 +39,16 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
         <section class="intro" id="intro-section">
             <h2 class="section-title">Explore My Work</h2>
             <p class="section-description">This portfolio showcases my passion for both technology and photography. Scroll down to explore!</p>
+        </section>
+
+        <!-- Gallery Section -->
+        <section class="gallery">
+            <h3 class="section-title">Featured Photography</h3>
+            <div class="gallery-grid">
+                <img src="https://source.unsplash.com/400x300/?photography" alt="Placeholder for Photography 1">
+                <img src="https://source.unsplash.com/400x300/?nature" alt="Placeholder for Photography 2">
+                <img src="https://source.unsplash.com/400x300/?cityscape" alt="Placeholder for Photography 3">
+            </div>
         </section>
 
         <section class="quick-links">

@@ -1,17 +1,18 @@
 /* Default (Light Mode) */
 :root {
-    --bg-color: #ffffff;               /* Lighter background for a softer feel */
-    --text-color: #333333;              /* Darker text for better contrast */
-    --header-bg-color: #f7f7f7;         /* Subtle light gray for header */
-    --header-text-color: #222;          /* Dark text color for the header */
-    --link-color: #3498db;              /* Soft blue for links */
-    --link-hover-color: #2980b9;        /* Slightly darker blue on hover */
-    --button-bg-color: #e1e1e1;         /* Light button background */
-    --button-hover-bg-color: #3498db;   /* Highlight button hover with blue */
-    --border-color: #e1e1e1;            /* Subtle border for clean separation */
-    --shadow-color: rgba(0, 0, 0, 0.1); /* Soft shadow */
-    --scrollbar-thumb: #aaa;            /* Soft scrollbar thumb */
-    --scrollbar-track: #f9f9f9;         /* Soft scrollbar track */
+    --bg-color: #dad1d1;               
+    --text-color: #333333;              
+    --header-bg-color: #d1d0d0;         
+    --header-text-color: #222;          
+    --link-color: #3498db;              
+    --link-hover-color: #2980b9;        
+    --button-bg-color: #e1e1e1;         
+    --button-hover-bg-color: #3498db; 
+    --button-text-colour: black;  
+    --border-color: #e1e1e1;            
+    --shadow-color: rgba(0, 0, 0, 0.1); 
+    --scrollbar-thumb: #aaa;           
+    --scrollbar-track: #f9f9f9;         
     --image-hero: url('../assets/images-home/anime-deviantart-clip-art-anime-girl-def258cd35ad1c5a868465f36bf1426c.png');
 }
 
@@ -23,8 +24,9 @@
     --header-text-color: #ecf0f1;       
     --link-color: #e74c3c;           
     --link-hover-color: #f39c12;       
-    --button-bg-color: #34495e;         
+    --button-bg-color: rgba(52, 73, 94, 0.85);         
     --button-hover-bg-color: #e74c3c;  
+    --button-text-colour: black;  
     --border-color: #7f8c8d;            
     --shadow-color: rgba(255, 255, 255, 0.1); 
     --scrollbar-thumb: #555;           
@@ -43,20 +45,22 @@ body, html {
     scroll-behavior: smooth; /* Smooth scroll */
 }
 
-/* Scrollbar Styles */
+/* Hide Scrollbar */
+body {
+    overflow-y: auto; /* Ensure vertical scrolling */
+}
+
 body::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+    width: 4px;
 }
 
 body::-webkit-scrollbar-thumb {
-    background-color: var(--scrollbar-thumb);
+    background: var(--scrollbar-thumb);
     border-radius: 10px;
 }
 
 body::-webkit-scrollbar-track {
-    background-color: var(--scrollbar-track);
-    border-radius: 10px;
+    background: var(--bg-color);
 }
 
 /* Header */
@@ -132,7 +136,7 @@ nav a:hover {
     font-size: 1.2em;
     background: var(--button-bg-color);
     border: none;
-    color: var(--header-bg-color);
+    color: var(--button-text-colour);
     cursor: pointer;
     transition: background 0.3s ease, transform 0.3s ease;
     border-radius: 5px;
