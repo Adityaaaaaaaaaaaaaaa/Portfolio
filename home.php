@@ -23,6 +23,9 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
     <script src="./js/home_animation.js"></script>
     <script src="js/dark_mode.js"></script>
     <script src="js/mouse.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="js/carousel.js"></script>
 </head>
 <body>
     <?php include 'php/templates/header.php'; ?>
@@ -41,15 +44,52 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
             <p class="section-description">This portfolio showcases my passion for both technology and photography. Scroll down to explore!</p>
         </section>
 
-        <!-- Gallery Section -->
-        <section class="gallery">
-            <h3 class="section-title">Featured Photography</h3>
-            <div class="gallery-grid">
-                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 1">
-                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 2">
-                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 3">
+        <!-- Photo Carousel Section -->
+        <section class="photo-carousel">
+            <h3 class="section-title">Photo Carousel</h3>
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <!-- Carousel Slides -->
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=1" alt="Photo 1" data-description="This is Photo 1" data-link="https://example.com/photo1">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=2" alt="Photo 2" data-description="This is Photo 2" data-link="https://example.com/photo2">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=3" alt="Photo 3" data-description="This is Photo 3" data-link="https://example.com/photo3">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=4" alt="Photo 4" data-description="This is Photo 4" data-link="https://example.com/photo4">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=5" alt="Photo 5" data-description="This is Photo 5" data-link="https://example.com/photo5">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=6" alt="Photo 6" data-description="This is Photo 6" data-link="https://example.com/photo6">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=7" alt="Photo 7" data-description="This is Photo 7" data-link="https://example.com/photo7">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=8" alt="Photo 8" data-description="This is Photo 8" data-link="https://example.com/photo8">
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://picsum.photos/400/300?random=9" alt="Photo 9" data-description="This is Photo 9" data-link="https://example.com/photo9">
+                    </div>
+                </div>
             </div>
         </section>
+
+        <!-- Popup Modal -->
+        <div id="photo-popup" class="popup hidden">
+            <div class="popup-content">
+                <span class="popup-close">&times;</span> <!-- This is the close button -->
+                <img id="popup-image" src="" alt="Popup Image">
+                <p id="popup-description"></p>
+                <a id="popup-link" href="#" target="_blank">View More</a>
+            </div>
+        </div>
 
         <section class="quick-links">
             <h3 class="section-title">Quick Navigation</h3>
