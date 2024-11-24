@@ -1,18 +1,18 @@
 /* Default (Light Mode) */
 :root {
-    --bg-color: #f1f1f1;               
-    --text-color: #222;              
-    --header-bg-color: #333;           
-    --header-text-color: #fff;          
-    --link-color: #3498db;             
-    --link-hover-color: #f39c12;        
-    --button-bg-color: #e8e8e8;         
-    --button-hover-bg-color: #3498db;   
-    --border-color: #ddd;               
-    --shadow-color: rgba(0, 0, 0, 0.2); 
-    --scrollbar-thumb: #aaa;            
-    --scrollbar-track: #f1f1f1; 
-    --image-hero: url('../assets/images-home/anime-deviantart-clip-art-anime-girl-def258cd35ad1c5a868465f36bf1426c.png');        
+    --bg-color: #ffffff;               /* Lighter background for a softer feel */
+    --text-color: #333333;              /* Darker text for better contrast */
+    --header-bg-color: #f7f7f7;         /* Subtle light gray for header */
+    --header-text-color: #222;          /* Dark text color for the header */
+    --link-color: #3498db;              /* Soft blue for links */
+    --link-hover-color: #2980b9;        /* Slightly darker blue on hover */
+    --button-bg-color: #e1e1e1;         /* Light button background */
+    --button-hover-bg-color: #3498db;   /* Highlight button hover with blue */
+    --border-color: #e1e1e1;            /* Subtle border for clean separation */
+    --shadow-color: rgba(0, 0, 0, 0.1); /* Soft shadow */
+    --scrollbar-thumb: #aaa;            /* Soft scrollbar thumb */
+    --scrollbar-track: #f9f9f9;         /* Soft scrollbar track */
+    --image-hero: url('../assets/images-home/anime-deviantart-clip-art-anime-girl-def258cd35ad1c5a868465f36bf1426c.png');
 }
 
 /* Dark Mode */
@@ -119,17 +119,16 @@ nav a:hover {
 .hero h1 {
     font-size: 3.5em;
     margin: 0.5em 0;
-    animation: fadeInDown 1s ease-in-out;
 }
 
 .hero p {
     font-size: 1.3em;
     margin: 0.5em 0;
-    animation: fadeInUp 1s ease-in-out;
 }
 
 #scroll-btn {
     padding: 1em 2.5em;
+    margin-top: 1em;
     font-size: 1.2em;
     background: var(--button-bg-color);
     border: none;
@@ -200,17 +199,6 @@ footer {
 }
 
 /* Animation Keyframes */
-@keyframes fadeInDown {
-    from {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 @keyframes fadeInUp {
     from {
         transform: translateY(100px);
@@ -228,7 +216,7 @@ footer {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.2);
+        transform: scale(1.3);
     }
     100% {
         transform: scale(1);

@@ -18,7 +18,10 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
     <title><?php echo $title; ?></title>
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+    <script src="./js/home_animation.js"></script>
+    <script src="js/dark_mode.js"></script>
 </head>
 <body>
     <?php include 'php/templates/header.php'; ?>
@@ -53,6 +56,5 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
     
     <?php include 'php/templates/footer.php'; ?>
 
-    <script src="js/dark_mode.js"></script>
 </body>
 </html>
