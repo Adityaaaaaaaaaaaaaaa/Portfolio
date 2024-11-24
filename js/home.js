@@ -67,21 +67,30 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+let phrases = []; // Initialize an empty array for phrases
+
 // Function to update the phrase every 5 seconds
 function updatePhrase() {
-    const timeIndex = Math.floor(Date.now() / 5000) % phrases.length;  // 5000 ms = 5 seconds
+    const timeIndex = Math.floor(Date.now() / 7500) % phrases.length;  // 5000 ms = 5 seconds
     const phraseElement = document.getElementById('dynamic-phrase');
-    if (phraseElement) {  // Check if the element exists
+    if (phraseElement && phrases.length > 0) {  // Check if the element exists and phrases array is not empty
         phraseElement.innerHTML = phrases[timeIndex];
     }
 }
 
 // Ensure the DOM is loaded before running the script
 document.addEventListener('DOMContentLoaded', function() {
-    // Update the phrase immediately and then every 5 seconds
-    updatePhrase();  // Run immediately on page load
-    setInterval(updatePhrase, 7500);  // Update every 7.5 seconds
+    // Fetch phrases from the JSON file
+    fetch('config/home.json')
+        .then(response => response.json())
+        .then(data => {
+            phrases = data.phrases || [];  // Load phrases from JSON
+            updatePhrase();  // Update the phrase immediately on page load
+            setInterval(updatePhrase, 7500);  // Update every 5 seconds
+        })
+        .catch(error => console.error(error));
 });
+
 
 // Function to scroll smoothly to the next section
 function smoothScrollToSection() {
@@ -158,64 +167,12 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// Arrays of images for light and dark themes
-const lightImages = [
-    'assets/images-home/img1.png', 
-    'assets/images-home/img2.png',
-    'assets/images-home/img3.png', 
-    'assets/images-home/img4.png',
-    'assets/images-home/img5.png',
-    'assets/images-home/img6.png',
-    'assets/images-home/img7.png',
-    'assets/images-home/img8.png',
-    'assets/images-home/img9.png',
-    'assets/images-home/img10.png',
-    'assets/images-home/img11.png',
-    'assets/images-home/img12.png',
-    'assets/images-home/img13.png',
-    'assets/images-home/img14.png',
-    'assets/images-home/img15.png',
-    'assets/images-home/img16.png',
-    'assets/images-home/img17.png',
-    'assets/images-home/img18.png',
-    'assets/images-home/img19.png',
-    'assets/images-home/img20.png',
-    'assets/images-home/img21.png',
-    'assets/images-home/img22.png',
-    'assets/images-home/img23.png',
-    'assets/images-home/img24.png',
-    'assets/images-home/img25.png'
-];
+let lightImages = [];
+let darkImages = [];
+let lightImageIndices = [];
+let darkImageIndices = [];
 
-const darkImages = [
-    'assets/images-home/img1.png',
-    'assets/images-home/img2.png',
-    'assets/images-home/img3.png',
-    'assets/images-home/img4.png',
-    'assets/images-home/img5.png',
-    'assets/images-home/img6.png',
-    'assets/images-home/img7.png',
-    'assets/images-home/img8.png',
-    'assets/images-home/img9.png',
-    'assets/images-home/img10.png',
-    'assets/images-home/img11.png',
-    'assets/images-home/img12.png',
-    'assets/images-home/img13.png',
-    'assets/images-home/img14.png',
-    'assets/images-home/img15.png',
-    'assets/images-home/img16.png',
-    'assets/images-home/img17.png',
-    'assets/images-home/img18.png',
-    'assets/images-home/img19.png',
-    'assets/images-home/img20.png',
-    'assets/images-home/img21.png',
-    'assets/images-home/img22.png',
-    'assets/images-home/img23.png',
-    'assets/images-home/img24.png',
-    'assets/images-home/img25.png'
-];
-
-// Function to shuffle the array of indices
+// Function to shuffle an array
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -224,9 +181,6 @@ function shuffleArray(array) {
 }
 
 // Function to get the next unique image from the array
-let lightImageIndices = [...Array(lightImages.length).keys()];  // Array of indices 0-24
-let darkImageIndices = [...Array(darkImages.length).keys()];    // Array of indices 0-24
-
 function getNextUniqueImage(imagesArray, indicesArray) {
     if (indicesArray.length === 0) {
         // If all images have been used, reshuffle the indices array
@@ -237,7 +191,7 @@ function getNextUniqueImage(imagesArray, indicesArray) {
     return imagesArray[index];        // Get the image at that index
 }
 
-// Set the background image based on the current theme
+// Function to set the theme image
 function setThemeImage() {
     const theme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no theme is stored
     const imageContainer = document.getElementById('theme-image');
@@ -251,9 +205,30 @@ function setThemeImage() {
 
     // Set the background image of the hero div
     imageContainer.style.backgroundImage = `url(${imagePath})`;
-    // imageContainer.style.backgroundSize = 'cover';
-    // imageContainer.style.backgroundPosition = 'center';
 }
+
+// Load images from JSON and initialize the arrays
+fetch('config//home.json')  // Replace 'path/to/config.json' with the actual path to your JSON file
+    .then(response => response.json())
+    .then(data => {
+        const allImages = data.images;
+
+        // Split the images into light and dark images
+        lightImages = allImages.filter((_, index) => index % 2 === 0); // Even indices for light images
+        darkImages = allImages.filter((_, index) => index % 2 !== 0); // Odd indices for dark images
+
+        // Initialize indices arrays
+        lightImageIndices = [...Array(lightImages.length).keys()];
+        darkImageIndices = [...Array(darkImages.length).keys()];
+
+        // Shuffle indices initially
+        shuffleArray(lightImageIndices);
+        shuffleArray(darkImageIndices);
+
+        // Set the initial theme image
+        setThemeImage();
+    })
+    .catch(error => console.error("Error loading JSON file:", error));
 
 // Handle theme toggle
 document.getElementById('toggle-btn').addEventListener('click', () => {
@@ -266,7 +241,5 @@ document.getElementById('toggle-btn').addEventListener('click', () => {
 
 // Call setThemeImage on page load to set the initial image
 window.onload = () => {
-    shuffleArray(lightImageIndices);  // Shuffle the light image indices initially
-    shuffleArray(darkImageIndices);   // Shuffle the dark image indices initially
-    setThemeImage();
+    // The fetch will handle the logic when JSON is loaded
 };
