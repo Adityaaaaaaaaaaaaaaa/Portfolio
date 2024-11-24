@@ -210,28 +210,26 @@ function setThemeImage() {
     const theme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no theme is stored
     const imageContainer = document.getElementById('theme-image');
 
-    let imagePath;
-    if (theme === 'dark') {
-        imagePath = getRandomImage(darkImages);
-    } else {
-        imagePath = getRandomImage(lightImages);
+    // Remove any existing image element if present
+    const existingImage = imageContainer.querySelector('img');
+    if (existingImage) {
+        existingImage.remove();
     }
 
-    // Set the background image of the hero div
-    imageContainer.style.backgroundImage = `url(${imagePath})`;
-    imageContainer.style.backgroundSize = 'cover';
-    imageContainer.style.backgroundPosition = 'center';
+    // Create a new image element
+    const imagePath = theme === 'dark' ? getRandomImage(darkImages) : getRandomImage(lightImages);
+    const img = document.createElement('img');
+    img.src = imagePath;
+    img.alt = "Hero Image";  // Optional: Add alt text for accessibility
+
+    // Append the new image element to the hero section
+    imageContainer.appendChild(img);
 }
 
 // Handle theme toggle
 document.getElementById('toggle-btn').addEventListener('click', () => {
     let currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-        currentTheme = 'light';
-    } else {
-        currentTheme = 'dark';
-    }
-
+    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
     localStorage.setItem('theme', currentTheme); // Save the theme to local storage
     setThemeImage(); // Set the new theme image
 });
