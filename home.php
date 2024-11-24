@@ -55,34 +55,27 @@
             <h3 class="section-title">Photo Carousel</h3>
             <div class="swiper-container">
                 <div class="swiper-wrapper">
-                    <!-- Carousel Slides -->
+                    <?php
+                        $photos = [
+                            ['src' => 'https://picsum.photos/400/300?random=1', 'description' => 'This is Photo 1', 'link' => 'https://example.com/photo1'],
+                            ['src' => 'https://picsum.photos/400/300?random=2', 'description' => 'This is Photo 2', 'link' => 'https://example.com/photo2'],
+                            ['src' => 'https://picsum.photos/400/300?random=3', 'description' => 'This is Photo 3', 'link' => 'https://example.com/photo3'],
+                            ['src' => 'https://picsum.photos/400/300?random=4', 'description' => 'This is Photo 4', 'link' => 'https://example.com/photo4'],
+                            ['src' => 'https://picsum.photos/400/300?random=5', 'description' => 'This is Photo 5', 'link' => 'https://example.com/photo5'],
+                            ['src' => 'https://picsum.photos/400/300?random=6', 'description' => 'This is Photo 6', 'link' => 'https://example.com/photo6'],
+                            ['src' => 'https://picsum.photos/400/300?random=7', 'description' => 'This is Photo 7', 'link' => 'https://example.com/photo7'],
+                            ['src' => 'https://picsum.photos/400/300?random=8', 'description' => 'This is Photo 8', 'link' => 'https://example.com/photo8'],
+                            ['src' => 'https://picsum.photos/400/300?random=9', 'description' => 'This is Photo 9', 'link' => 'https://example.com/photo9']
+                        ];
+                    
+                        foreach ($photos as $photo): 
+                    ?>
                     <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=1" alt="Photo 1" data-description="This is Photo 1" data-link="https://example.com/photo1">
+                        <img src="<?php echo $photo['src']; ?>" alt="<?php echo $photo['description']; ?>" data-description="<?php echo $photo['description']; ?>" data-link="<?php echo $photo['link']; ?>">
                     </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=2" alt="Photo 2" data-description="This is Photo 2" data-link="https://example.com/photo2">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=3" alt="Photo 3" data-description="This is Photo 3" data-link="https://example.com/photo3">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=4" alt="Photo 4" data-description="This is Photo 4" data-link="https://example.com/photo4">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=5" alt="Photo 5" data-description="This is Photo 5" data-link="https://example.com/photo5">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=6" alt="Photo 6" data-description="This is Photo 6" data-link="https://example.com/photo6">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=7" alt="Photo 7" data-description="This is Photo 7" data-link="https://example.com/photo7">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=8" alt="Photo 8" data-description="This is Photo 8" data-link="https://example.com/photo8">
-                    </div>
-                    <div class="swiper-slide">
-                        <img src="https://picsum.photos/400/300?random=9" alt="Photo 9" data-description="This is Photo 9" data-link="https://example.com/photo9">
-                    </div>
+                    <?php 
+                        endforeach; 
+                    ?>
                 </div>
             </div>
         </section>
