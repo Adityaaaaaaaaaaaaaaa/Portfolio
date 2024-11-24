@@ -14,7 +14,3 @@ document.addEventListener('DOMContentLoaded', function() {
         localStorage.setItem('darkMode', isDarkMode);
     });
 });
-
-document.getElementById("toggle-btn").addEventListener("click", (event) => {
-    event.preventDefault(); // Prevents the link from navigating
-});
