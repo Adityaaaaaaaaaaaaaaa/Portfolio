@@ -104,7 +104,6 @@ $selectedPhrase = $phrases[$timeIndex];
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-    <script src="js/carousel.js"></script>
     <script src="js/dark_mode.js"></script>
     <script>
         // Passing the PHP array to JavaScript as a global variable
@@ -191,7 +190,7 @@ $selectedPhrase = $phrases[$timeIndex];
     </main>
     
     <?php include 'php/templates/footer.php'; ?>
-    <script src="./js/home_animation.js"></script>
+    <script src="./js/home.js"></script>
 
 </body>
 </html>
