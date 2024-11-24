@@ -224,8 +224,8 @@ function shuffleArray(array) {
 }
 
 // Function to get the next unique image from the array
-let lightImageIndices = [...Array(lightImages.length).keys()];  // Array of indices 0-16
-let darkImageIndices = [...Array(darkImages.length).keys()];    // Array of indices 0-16
+let lightImageIndices = [...Array(lightImages.length).keys()];  // Array of indices 0-24
+let darkImageIndices = [...Array(darkImages.length).keys()];    // Array of indices 0-24
 
 function getNextUniqueImage(imagesArray, indicesArray) {
     if (indicesArray.length === 0) {
@@ -258,11 +258,7 @@ function setThemeImage() {
 // Handle theme toggle
 document.getElementById('toggle-btn').addEventListener('click', () => {
     let currentTheme = localStorage.getItem('theme');
-    if (currentTheme === 'dark') {
-        currentTheme = 'light';
-    } else {
-        currentTheme = 'dark';
-    }
+    currentTheme = (currentTheme === 'dark') ? 'light' : 'dark';
 
     localStorage.setItem('theme', currentTheme); // Save the theme to local storage
     setThemeImage(); // Set the new theme image
