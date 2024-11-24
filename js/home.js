@@ -176,7 +176,15 @@ const lightImages = [
     'assets/images-home/img14.png',
     'assets/images-home/img15.png',
     'assets/images-home/img16.png',
-    'assets/images-home/img17.png'
+    'assets/images-home/img17.png',
+    'assets/images-home/img18.png',
+    'assets/images-home/img19.png',
+    'assets/images-home/img20.png',
+    'assets/images-home/img21.png',
+    'assets/images-home/img22.png',
+    'assets/images-home/img23.png',
+    'assets/images-home/img24.png',
+    'assets/images-home/img25.png'
 ];
 
 const darkImages = [
@@ -196,13 +204,37 @@ const darkImages = [
     'assets/images-home/img14.png',
     'assets/images-home/img15.png',
     'assets/images-home/img16.png',
-    'assets/images-home/img17.png'
+    'assets/images-home/img17.png',
+    'assets/images-home/img18.png',
+    'assets/images-home/img19.png',
+    'assets/images-home/img20.png',
+    'assets/images-home/img21.png',
+    'assets/images-home/img22.png',
+    'assets/images-home/img23.png',
+    'assets/images-home/img24.png',
+    'assets/images-home/img25.png'
 ];
 
-// Function to randomly select an image from an array
-function getRandomImage(imagesArray) {
-    const randomIndex = Math.floor(Math.random() * imagesArray.length);
-    return imagesArray[randomIndex];
+// Function to shuffle the array of indices
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+    }
+}
+
+// Function to get the next unique image from the array
+let lightImageIndices = [...Array(lightImages.length).keys()];  // Array of indices 0-16
+let darkImageIndices = [...Array(darkImages.length).keys()];    // Array of indices 0-16
+
+function getNextUniqueImage(imagesArray, indicesArray) {
+    if (indicesArray.length === 0) {
+        // If all images have been used, reshuffle the indices array
+        indicesArray.push(...Array(imagesArray.length).keys());  // Refill with indices
+        shuffleArray(indicesArray);  // Shuffle the indices array
+    }
+    const index = indicesArray.pop();  // Get the last index from the shuffled array
+    return imagesArray[index];        // Get the image at that index
 }
 
 // Set the background image based on the current theme
@@ -210,31 +242,35 @@ function setThemeImage() {
     const theme = localStorage.getItem('theme') || 'light'; // Default to 'light' if no theme is stored
     const imageContainer = document.getElementById('theme-image');
 
-    // Remove any existing image element if present
-    const existingImage = imageContainer.querySelector('img');
-    if (existingImage) {
-        existingImage.remove();
+    let imagePath;
+    if (theme === 'dark') {
+        imagePath = getNextUniqueImage(darkImages, darkImageIndices);
+    } else {
+        imagePath = getNextUniqueImage(lightImages, lightImageIndices);
     }
 
-    // Create a new image element
-    const imagePath = theme === 'dark' ? getRandomImage(darkImages) : getRandomImage(lightImages);
-    const img = document.createElement('img');
-    img.src = imagePath;
-    img.alt = "Hero Image";  // Optional: Add alt text for accessibility
-
-    // Append the new image element to the hero section
-    imageContainer.appendChild(img);
+    // Set the background image of the hero div
+    imageContainer.style.backgroundImage = `url(${imagePath})`;
+    // imageContainer.style.backgroundSize = 'cover';
+    // imageContainer.style.backgroundPosition = 'center';
 }
 
 // Handle theme toggle
 document.getElementById('toggle-btn').addEventListener('click', () => {
     let currentTheme = localStorage.getItem('theme');
-    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    if (currentTheme === 'dark') {
+        currentTheme = 'light';
+    } else {
+        currentTheme = 'dark';
+    }
+
     localStorage.setItem('theme', currentTheme); // Save the theme to local storage
     setThemeImage(); // Set the new theme image
 });
 
 // Call setThemeImage on page load to set the initial image
 window.onload = () => {
+    shuffleArray(lightImageIndices);  // Shuffle the light image indices initially
+    shuffleArray(darkImageIndices);   // Shuffle the dark image indices initially
     setThemeImage();
 };
