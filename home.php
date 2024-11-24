@@ -45,9 +45,9 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
         <section class="gallery">
             <h3 class="section-title">Featured Photography</h3>
             <div class="gallery-grid">
-                <img src="https://source.unsplash.com/400x300/?photography" alt="Placeholder for Photography 1">
-                <img src="https://source.unsplash.com/400x300/?nature" alt="Placeholder for Photography 2">
-                <img src="https://source.unsplash.com/400x300/?cityscape" alt="Placeholder for Photography 3">
+                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 1">
+                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 2">
+                <img src="https://picsum.photos/400/300" alt="Placeholder for Photography 3">
             </div>
         </section>
 
