@@ -1,6 +1,6 @@
 /* Default (Light Mode) */
 :root {
-    --bg-color: #dad1d1;               
+    --bg-color: #aeaeae;               
     --text-color: #333333;              
     --header-bg-color: #d1d0d0;         
     --header-text-color: #222;          
@@ -14,6 +14,8 @@
     --scrollbar-thumb: #aaa;           
     --scrollbar-track: #f9f9f9;         
     --image-hero: url('../assets/images-home/anime-deviantart-clip-art-anime-girl-def258cd35ad1c5a868465f36bf1426c.png');
+    --intro-image-text: rgb(238, 238, 238);
+    --intro-image-text-shadow: 1px 1px 2px rgba(255, 0, 0, 0.5);
 }
 
 /* Dark Mode */
@@ -31,7 +33,9 @@
     --shadow-color: rgba(255, 255, 255, 0.1); 
     --scrollbar-thumb: #555;           
     --scrollbar-track: #2c3e50; 
-    --image-hero: url('../assets/images-home/mecha-anime-cyborg-female-manga-a7343837fccd29ddcd9e31840bc677cc.png');        
+    --image-hero: url('../assets/images-home/mecha-anime-cyborg-female-manga-a7343837fccd29ddcd9e31840bc677cc.png'); 
+    --intro-image-text: rgb(255, 255, 255);
+    --intro-image-text-shadow: 0px 2px 2px rgb(255, 0, 0);
 }
 
 /* Base Styles */
@@ -89,6 +93,7 @@ nav a {
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
 }
 
 nav a:hover {
@@ -129,6 +134,11 @@ nav a:hover {
     margin: 0.5em 0;
 }
 
+.intro_text {
+    color: var(--intro-image-text);
+    text-shadow: var(--intro-image-text-shadow);
+}
+
 #scroll-btn {
     padding: 1em 2.5em;
     margin-top: 1em;
@@ -161,14 +171,14 @@ nav a:hover {
 
 /* Intro Section */
 .intro {
-    padding: 4em 0;
+    padding: 2em 0;
     text-align: center;
 }
 
 /* Quick Links Section */
 .quick-links {
     background-color: var(--border-color);
-    padding: 3em 0;
+    padding: 1em 0;
     text-align: center;
 }
 
@@ -230,6 +240,14 @@ nav a:hover, .quick-link:hover {
     animation: hoverScale 0.6s ease-in-out;
 }
 
+.photo-carousel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 1em 0;
+}
+
 /* Swiper Carousel Styles */
 .swiper-container {
     width: 90%;
@@ -250,11 +268,13 @@ nav a:hover, .quick-link:hover {
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.664);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
 }
 
 .swiper-slide img:hover {
     transform: scale(1.05);
     box-shadow: 0 10px 20px rgb(0, 0, 0);
+    cursor: pointer;
 }
 
 /* Popup Modal */
@@ -289,6 +309,7 @@ nav a:hover, .quick-link:hover {
 .popup img {
     width: 100%;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .popup-close {

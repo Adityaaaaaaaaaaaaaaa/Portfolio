@@ -33,8 +33,8 @@ $greeting = ($hour < 12) ? "Good Morning" : (($hour < 18) ? "Good Afternoon" : "
     <main>
         <section class="hero">
             <div class="hero-content">
-                <h1 class="animate__animated animate__fadeInDown"><?php echo $greeting; ?>, Welcome to My Portfolio!</h1>
-                <p class="animate__animated animate__fadeInUp"><?php echo $tagline; ?></p>
+                <h1 class="animate__animated animate__fadeInDown intro_text"><?php echo $greeting; ?>, Welcome to My Portfolio!</h1>
+                <p class="animate__animated animate__fadeInUp intro_text"><?php echo $tagline; ?></p>
                 <button id="scroll-btn" class="animate__animated animate__pulse">Explore More</button>
             </div>
         </section>
