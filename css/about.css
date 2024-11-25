@@ -1,48 +1,52 @@
 /* Default (Light Mode) */
 :root {
     --text-color: #333333;
-    --header-bg-color: #969595;
-    --header-text-color: #222;
-    --secondary-color: #f0f0f0;
-    --primary-color: #3498db;
-    --accent-color: #e74c3c;
-    --section-background: #f9f9f9;
-    --section-background-alt: #ffffff;
+    --header-bg-color: #3498db; /* Light blue header */
+    --header-text-color: #ffffff; /* White header text */
+    --secondary-color: #f0f0f0; /* Soft gray background */
+    --primary-color: #3498db; /* Main primary color */
+    --accent-color: #e74c3c; /* Accent color */
+    --section-background: #ffffff; /* White background for sections */
+    --section-background-alt: #f9f9f9; /* Alternate soft gray */
 }
 
 /* Dark Mode */
 :root.dark-mode {
     --text-color: #ecf0f1;
-    --header-bg-color: #3f5c7b;
-    --header-text-color: #ecf0f1;
-    --secondary-color: #34495e;
-    --primary-color: #2c3e50;
-    --accent-color: #f39c12;
-    --section-background: #2c3e50;
-    --section-background-alt: #34495e;
+    --header-bg-color: #34495e; /* Darker blue-gray header */
+    --header-text-color: #ecf0f1; /* Light text in dark mode */
+    --secondary-color: #34495e; /* Dark background */
+    --primary-color: #2c3e50; /* Darker primary color */
+    --accent-color: #f39c12; /* Golden yellow accent */
+    --section-background: #2c3e50; /* Dark background for sections */
+    --section-background-alt: #34495e; /* Darker alternate section background */
 }
 
 /* About Hero Section */
 .about-hero {
     text-align: center;
-    padding: 5rem 2rem;
+    padding: 6rem 2rem; /* Increased padding for balance */
     background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
     color: var(--header-text-color);
+    border-bottom: 5px solid var(--accent-color); /* Accent border for section separation */
 }
 
 .about-hero h1 {
-    font-size: 3rem;
+    font-size: 3.5rem; /* Larger text size for more impact */
     margin: 0;
+    text-transform: uppercase; /* To add emphasis */
+    letter-spacing: 2px; /* Slight letter-spacing for clarity */
 }
 
 .about-hero p {
-    font-size: 1.5rem;
+    font-size: 1.6rem; /* Adjusted font size for better readability */
     margin-top: 1rem;
+    font-style: italic; /* Added italics for visual variety */
 }
 
 /* Timeline Section */
 .timeline-section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     background-color: var(--section-background);
     color: var(--text-color);
 }
@@ -50,16 +54,18 @@
 .timeline-section h2 {
     text-align: center;
     margin-bottom: 2rem;
-    font-size: 2.5rem;
+    font-size: 2.8rem; /* Increased font size */
     color: var(--header-text-color);
+    font-weight: bold; /* Bolded for impact */
 }
 
 /* Skills Section */
 .skills-section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
     color: var(--text-color);
     text-align: center;
+    border-top: 3px solid var(--accent-color); /* Add border for separation */
 }
 
 .skills-container {
@@ -70,22 +76,23 @@
 }
 
 .skill {
-    width: 200px;
+    width: 230px; /* Slightly wider for balance */
     text-align: center;
 }
 
 .skill h3 {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* Slightly larger skill titles */
     margin-bottom: 0.5rem;
 }
 
 .skill-bar {
-    height: 10px;
+    height: 12px; /* Slightly taller bar for better visibility */
     background-color: var(--secondary-color);
     border-radius: 5px;
     margin-top: 0.5rem;
     position: relative;
     overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
 }
 
 .skill-bar::after {
@@ -104,9 +111,10 @@
 
 /* Spline Placeholder Section */
 .spline-section {
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
     text-align: center;
     background-color: var(--section-background-alt);
+    border-top: 3px solid var(--accent-color); /* Add a border on top */
 }
 
 #spline-placeholder {
@@ -116,16 +124,18 @@
     border: 2px dashed var(--accent-color);
     border-radius: 10px;
     color: var(--text-color);
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
 /* Timeline Styling */
 .timeline-section {
     padding: 50px 0;
-    background-color: #f4f4f4;
+    background-color: var(--section-background);
 }
 
 .timeline-item {
-    background: #fff;
+    background: var(--section-background); /* Consistent background */
     margin: 20px 0;
     padding: 15px;
     border-radius: 5px;
@@ -138,6 +148,7 @@
 .timeline-item p {
     font-size: 16px;
     line-height: 1.6;
+    text-align: center; /* Center-align text */
 }
 
 .timeline-item strong {
@@ -155,3 +166,27 @@
 .timeline-item:active {
     transform: scale(1.1);
 }
+
+/* Scroll Trigger Animations */
+.timeline-section {
+    padding: 50px 0;
+    background-color: var(--section-background);
+}
+
+.section-title, .section-description {
+    text-align: center; /* Ensuring all section titles and descriptions are centered */
+    margin: 20px 0;
+    font-size: 1.5rem;
+    color: var(--header-text-color);
+}
+
+/* Additional Styling for a Refined Look */
+body {
+    font-family: 'Arial', sans-serif; /* More modern font */
+    line-height: 1.6;
+}
+
+h2, h3 {
+    text-transform: capitalize;
+}
+
