@@ -1,6 +1,5 @@
 /* Default (Light Mode) */
 :root {
-    --bg-color: #aeaeae;               
     --text-color: #333333;              
     --header-bg-color: #969595;         
     --header-text-color: #222;          
@@ -19,7 +18,6 @@
 
 /* Dark Mode */
 :root.dark-mode {
-    --bg-color: #2c3e50;               
     --text-color: #ecf0f1;            
     --header-bg-color: #3f5c7b;         
     --header-text-color: #ecf0f1;       

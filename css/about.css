@@ -1,0 +1,157 @@
+/* Default (Light Mode) */
+:root {
+    --text-color: #333333;
+    --header-bg-color: #969595;
+    --header-text-color: #222;
+    --secondary-color: #f0f0f0;
+    --primary-color: #3498db;
+    --accent-color: #e74c3c;
+    --section-background: #f9f9f9;
+    --section-background-alt: #ffffff;
+}
+
+/* Dark Mode */
+:root.dark-mode {
+    --text-color: #ecf0f1;
+    --header-bg-color: #3f5c7b;
+    --header-text-color: #ecf0f1;
+    --secondary-color: #34495e;
+    --primary-color: #2c3e50;
+    --accent-color: #f39c12;
+    --section-background: #2c3e50;
+    --section-background-alt: #34495e;
+}
+
+/* About Hero Section */
+.about-hero {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--header-text-color);
+}
+
+.about-hero h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.about-hero p {
+    font-size: 1.5rem;
+    margin-top: 1rem;
+}
+
+/* Timeline Section */
+.timeline-section {
+    padding: 4rem 2rem;
+    background-color: var(--section-background);
+    color: var(--text-color);
+}
+
+.timeline-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.5rem;
+    color: var(--header-text-color);
+}
+
+/* Skills Section */
+.skills-section {
+    padding: 4rem 2rem;
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    color: var(--text-color);
+    text-align: center;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.skill {
+    width: 200px;
+    text-align: center;
+}
+
+.skill h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.skill-bar {
+    height: 10px;
+    background-color: var(--secondary-color);
+    border-radius: 5px;
+    margin-top: 0.5rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.skill-bar::after {
+    content: '';
+    display: block;
+    height: 100%;
+    width: 0;
+    background-color: var(--accent-color);
+    transition: width 1.5s ease;
+    border-radius: 5px;
+}
+
+.skill-bar[data-skill="90%"]::after { width: 90%; }
+.skill-bar[data-skill="85%"]::after { width: 85%; }
+.skill-bar[data-skill="80%"]::after { width: 80%; }
+
+/* Spline Placeholder Section */
+.spline-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    background-color: var(--section-background-alt);
+}
+
+#spline-placeholder {
+    margin-top: 2rem;
+    padding: 3rem;
+    background-color: var(--secondary-color);
+    border: 2px dashed var(--accent-color);
+    border-radius: 10px;
+    color: var(--text-color);
+}
+
+/* Timeline Styling */
+.timeline-section {
+    padding: 50px 0;
+    background-color: #f4f4f4;
+}
+
+.timeline-item {
+    background: #fff;
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Start hidden for GSAP animation */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-item p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.timeline-item strong {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+/* Hover Effects */
+.timeline-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Active (Clicked) State */
+.timeline-item:active {
+    transform: scale(1.1);
+}
