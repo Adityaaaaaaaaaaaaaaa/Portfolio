@@ -11,6 +11,9 @@
     --timeline-bg: #e3f2fd; /* Light blue background for timeline items */
     --timeline-hover-shadow: rgba(0, 123, 255, 0.3); /* Subtle blue shadow for hover */
     --timeline-text-hover: rgb(0, 0, 0);
+    --buttonx-shadow: inset 0px 0px 25px rgb(119, 0, 255);
+    --buttonx-border: 1px solid #ff0000;
+
 }
 
 /* Dark Mode */
@@ -26,6 +29,8 @@
     --timeline-bg: #263238; /* Dark gray background for timeline items */
     --timeline-hover-shadow: rgba(255, 255, 255, 0.3); /* Subtle white shadow for hover */
     --timeline-text-hover: rgb(235, 235, 235);
+    --buttonx-shadow: inset 0px 0px 25px rgb(0, 255, 0);
+    --buttonx-border: 1px solid #00a2ff;
 }
 
 /* About Hero Section */
@@ -52,7 +57,7 @@
 
 /* Skills Section */
 .skills-section {
-    padding: 5rem 2rem;
+    padding: 2rem;
     background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
     color: var(--text-color);
     text-align: center;
@@ -96,9 +101,9 @@
     border-radius: 5px;
 }
 
-.skill-bar[data-skill="90%"]::after { width: 90%; }
-.skill-bar[data-skill="85%"]::after { width: 85%; }
-.skill-bar[data-skill="80%"]::after { width: 80%; }
+.skill-bar[data-skill="photo"]::after { width: 70%; }
+.skill-bar[data-skill="web"]::after { width: 65%; }
+.skill-bar[data-skill="java"]::after { width: 60%; }
 
 /* Spline Placeholder Section */
 .spline-section {
@@ -161,7 +166,6 @@ h2, h3 {
     cursor: pointer;
     transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     color: var(--text-color);
-    font-weight: bold;
     font-size: 18px;
 }
 
@@ -181,4 +185,56 @@ h2, h3 {
 
 .timeline-item:hover p {
     font-size: 16px;
+    font-weight: bold;
+}
+
+#buttonx {
+    width: 10em;
+    position: relative;
+    height: 3.5em;
+    border: var(--buttonx-border);
+    outline: none;
+    background-color: transparent;
+    color: white;
+    transition: 1s;
+    border-radius: 0.3em;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#buttonx::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: transparent;
+    transition: 0.5s;
+    transform-origin: center;
+}
+
+#buttonx::before {
+    content: "";
+    transform-origin: center;
+    position: absolute;
+    top: 80%;
+    left: 3%;
+    width: 95%;
+    height: 40%;
+    background-color: transparent;
+    transition: 0.5s;
+}
+
+#buttonx:hover::before, #buttonx:hover::after {
+    transform: scale(0)
+}
+
+#buttonx:hover {
+    box-shadow: var(--buttonx-shadow);
+}
+
+.button-container {
+    margin: 3%;
 }

@@ -34,12 +34,20 @@
                 <p>Discovered my passion for capturing moments.</p>
             </div>
             <div class="timeline-item">
-                <p><strong>2020</strong> - Began Coding Journey</p>
-                <p>Started exploring web development.</p>
+                <p><strong>Nov 2022</strong> - Began Coding Journey</p>
+                <p>Started the University journey.</p>
             </div>
             <div class="timeline-item">
-                <p><strong>2023</strong> - Mastered Spring Boot</p>
-                <p>Built advanced backend systems.</p>
+                <p><strong>Year 1 - 2022 - 2023</strong> - University</p>
+                <p>lost, studying java, built a website, did not know what to do</p>
+            </div>
+            <div class="timeline-item">
+                <p><strong>Year 2 - 2023 - 2024</strong> - University</p>
+                <p>Crazy year, still figuting out howI landed my internship, how did I make till the exams</p>
+            </div>
+            <div class="timeline-item">
+                <p><strong>Year 3 - 2024 - 2025</strong> - University</p>
+                <p>Will update in due time, stay tuned !</p>
             </div>
         </div>
     </section>
@@ -50,17 +58,21 @@
         <div class="skills-container">
             <div class="skill">
                 <h3>Photography</h3>
-                <div class="skill-bar" data-skill="90%"></div>
+                <div class="skill-bar" data-skill="photo"></div>
             </div>
             <div class="skill">
                 <h3>Web Development</h3>
-                <div class="skill-bar" data-skill="85%"></div>
+                <div class="skill-bar" data-skill="web"></div>
             </div>
             <div class="skill">
-                <h3>Java (Spring Boot)</h3>
-                <div class="skill-bar" data-skill="80%"></div>
+                <h3>Java</h3>
+                <div class="skill-bar" data-skill="java"></div>
             </div>
-            <!-- Add more skills as needed -->
+        </div>
+        <div class="button-container">
+            <button id="buttonx" onclick="window.location.href = '/Portfolio/home.php';">
+                Learn more !
+            </button>
         </div>
     </section>
 
