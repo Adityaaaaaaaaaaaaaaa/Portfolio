@@ -6,8 +6,12 @@
     --secondary-color: #f0f0f0; /* Soft gray background */
     --primary-color: #3498db; /* Main primary color */
     --accent-color: #e74c3c; /* Accent color */
-    --section-background: #ffffff; /* White background for sections */
+    --section-background: #e1e1e1; /* White background for sections */
     --section-background-alt: #f9f9f9; /* Alternate soft gray */
+    --timeline-bg: #e3f2fd; /* Light blue background for timeline items */
+    --timeline-hover-shadow: rgba(0, 123, 255, 0.3); /* Subtle blue shadow for hover */
+    --timeline-text-hover: rgb(0, 0, 0);
+    --timeline-click-bg: teal;
 }
 
 /* Dark Mode */
@@ -20,6 +24,10 @@
     --accent-color: #f39c12; /* Golden yellow accent */
     --section-background: #2c3e50; /* Dark background for sections */
     --section-background-alt: #34495e; /* Darker alternate section background */
+    --timeline-bg: #263238; /* Dark gray background for timeline items */
+    --timeline-hover-shadow: rgba(255, 255, 255, 0.3); /* Subtle white shadow for hover */
+    --timeline-text-hover: rgb(255, 165, 0);
+    --timeline-click-bg: teal;
 }
 
 /* About Hero Section */
@@ -42,21 +50,6 @@
     font-size: 1.6rem; /* Adjusted font size for better readability */
     margin-top: 1rem;
     font-style: italic; /* Added italics for visual variety */
-}
-
-/* Timeline Section */
-.timeline-section {
-    padding: 5rem 2rem;
-    background-color: var(--section-background);
-    color: var(--text-color);
-}
-
-.timeline-section h2 {
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2.8rem; /* Increased font size */
-    color: var(--header-text-color);
-    font-weight: bold; /* Bolded for impact */
 }
 
 /* Skills Section */
@@ -128,51 +121,6 @@
     font-weight: bold;
 }
 
-/* Timeline Styling */
-.timeline-section {
-    padding: 50px 0;
-    background-color: var(--section-background);
-}
-
-.timeline-item {
-    background: var(--section-background); /* Consistent background */
-    margin: 20px 0;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    opacity: 0; /* Start hidden for GSAP animation */
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.timeline-item p {
-    font-size: 16px;
-    line-height: 1.6;
-    text-align: center; /* Center-align text */
-}
-
-.timeline-item strong {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-/* Hover Effects */
-.timeline-item:hover {
-    transform: scale(1.05);
-    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-/* Active (Clicked) State */
-.timeline-item:active {
-    transform: scale(1.1);
-}
-
-/* Scroll Trigger Animations */
-.timeline-section {
-    padding: 50px 0;
-    background-color: var(--section-background);
-}
-
 .section-title, .section-description {
     text-align: center; /* Ensuring all section titles and descriptions are centered */
     margin: 20px 0;
@@ -190,3 +138,51 @@ h2, h3 {
     text-transform: capitalize;
 }
 
+/* Timeline Section */
+.timeline-section {
+    padding: 5rem 2rem;
+    background-color: var(--section-background);
+}
+
+.timeline-section h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 2.8rem; /* Increased font size */
+    color: var(--header-text-color);
+    font-weight: bold; /* Bolded for impact */
+}
+
+/* Timeline Styling */
+.timeline-item {
+    background: var(--timeline-bg); /* Normal state background */
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(255, 0, 0, 0.1); /* Default box-shadow */
+    opacity: 0; /* Start hidden for GSAP animation */
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.timeline-item p {
+    font-size: 16px;
+    line-height: 1.6;
+    text-align: center; 
+}
+
+/* Hover Effects */
+.timeline-item:hover {
+    background: var(--timeline-hover-bg); /* Background on hover */
+    color: var(--timeline-text-hover);
+    transform: scale(1.05); /* Slight scale effect */
+    box-shadow: 0px 10px 20px var(--timeline-hover-shadow); /* Hover shadow */
+}
+
+/* Active (Clicked) State */
+.timeline-item:active {
+    background: var(--timeline-click-bg); /* Background on click */
+    transform: scale(1.1); /* Larger scale effect */
+}
