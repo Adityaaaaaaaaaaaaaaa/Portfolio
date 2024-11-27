@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", () => {
         item.addEventListener('mouseenter', () => {
             gsap.to(item, {
                 scale: 1.05,
-                rotation: 5,
+                rotation: 2,
                 boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
                 ease: "power3.out",
                 duration: 0.3,

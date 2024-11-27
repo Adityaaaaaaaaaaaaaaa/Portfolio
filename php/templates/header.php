@@ -2,11 +2,11 @@
 <?php
 // Define the navigation links in PHP
 $navLinks = [
-    "Home" => "home.php",
-    "About" => "pages/about.php",
-    "Portfolio" => "pages/portfolio.php",
-    "Resume" => "pages/resume.php",
-    "Contact" => "pages/contact.php"
+    "Home" => "/Portfolio/home.php",
+    "About" => "/Portfolio/pages/about.php",
+    "Portfolio" => "/Portfolio/pages/portfolio.php",
+    "Resume" => "/Portfolio/pages/resume.php",
+    "Contact" => "/Portfolio/pages/contact.php"
 ];
 ?>
 
