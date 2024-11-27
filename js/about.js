@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const timelineItems = document.querySelectorAll('.timeline-item');
     gsap.fromTo(
         timelineItems,
-        { opacity: 0, x: -200 },
+        { opacity: 0, x: 0 },
         {
             opacity: 1,
             x: 0,
@@ -59,11 +59,10 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(item, {
                 scale: 1.05,
                 rotation: 2,
-                boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
                 ease: "power3.out",
                 duration: 0.3,
                 y: -10,  // Adds a little lift effect
-                backgroundColor: "#f8f8f8", // Lightens the background on hover
+                backgroundColor: "tranparent", // Lightens the background on hover
             });
         });
 
@@ -71,7 +70,6 @@ document.addEventListener("DOMContentLoaded", () => {
             gsap.to(item, {
                 scale: 1,
                 rotation: 0,
-                boxShadow: "none",
                 ease: "power3.inOut",
                 duration: 0.3,
                 y: 0,
@@ -85,20 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 scale: 1.1,
                 duration: 0.4,
                 ease: "elastic.out(1, 0.5)",
-                onComplete: () => {
-                    alert(item.querySelector('p').textContent); // For demo: show the text of the clicked item
-                }
             });
-        });
-    });
-
-    // Optional: Additional Scroll Animation for Active Timeline Item
-    timelineItems.forEach((item, index) => {
-        ScrollTrigger.create({
-            trigger: item,
-            start: "top 80%",
-            onEnter: () => gsap.to(item, { opacity: 1, scale: 1.1, duration: 0.5 }),
-            onLeave: () => gsap.to(item, { opacity: 0.5, scale: 1, duration: 0.3 }),
         });
     });
 });
