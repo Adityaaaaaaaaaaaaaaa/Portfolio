@@ -238,3 +238,28 @@ h2, h3 {
 .button-container {
     margin: 3%;
 }
+
+.quote-container {
+    margin: 20px 0;
+    text-align: center;
+    font-style: italic;
+}
+
+.author {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.quote-controls {
+    margin-top: 20px;
+    text-align: center;
+}
+
+select, button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+}

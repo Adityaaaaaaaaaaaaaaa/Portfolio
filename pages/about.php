@@ -23,6 +23,19 @@
     <header class="about-hero">
         <h1>About Me</h1>
         <p>Discover my journey, skills, and what drives me forward.</p>
+
+        <div class="quote-container">
+            <p id="quote" class="quote">Fetching a quote...</p>
+            <p id="author" class="author"></p>
+        </div>
+
+        <div class="quote-controls">
+            <select id="category-selector">
+                <option value="">Random</option>
+            </select>
+            <button id="fetch-quote-btn">Fetch Quote</button>
+        </div>
+
     </header>
 
     <!-- Interactive Timeline Section -->
