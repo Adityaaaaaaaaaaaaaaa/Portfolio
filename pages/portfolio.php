@@ -28,14 +28,19 @@
         </section>
 
         <!-- Popup/Lightbox -->
-        <div id="lightbox" class="lightbox hidden">
+        <div id="lightbox" class="lightbox">
             <div class="lightbox-content">
-                <span class="close-btn">&times;</span>
-                <img id="lightbox-image" src="" alt="">
-                <div class="lightbox-details">
-                    <h2 id="lightbox-title"></h2>
-                    <p id="lightbox-description"></p>
+                <!-- Left: Image -->
+                <div class="lightbox-left">
+                    <img id="lightbox-image" src="" alt="Selected Image" />
                 </div>
+                <!-- Right: Metadata -->
+                <div class="lightbox-right">
+                    <h2 id="lightbox-title">Image Title</h2>
+                    <p id="lightbox-description">Description or Metadata</p>
+                </div>
+                <!-- Close Button -->
+                <div class="close-btn">&times;</div>
             </div>
         </div>
     </main>

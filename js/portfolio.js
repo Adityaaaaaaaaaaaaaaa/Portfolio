@@ -11,18 +11,22 @@ document.addEventListener("DOMContentLoaded", () => {
             const title = item.getAttribute("data-title");
             const description = item.getAttribute("data-description");
 
+            // Populate lightbox content
             lightboxImage.src = imageSrc;
-            lightboxTitle.textContent = title;
-            lightboxDescription.textContent = description;
+            lightboxTitle.textContent = title || "No Title";
+            lightboxDescription.textContent = description || "No Metadata Available";
 
+            // Show lightbox
             lightbox.classList.add("visible");
         });
     });
 
+    // Close lightbox when clicking the close button
     closeBtn.addEventListener("click", () => {
         lightbox.classList.remove("visible");
     });
 
+    // Close lightbox when clicking outside the content area
     lightbox.addEventListener("click", (event) => {
         if (event.target === lightbox) {
             lightbox.classList.remove("visible");

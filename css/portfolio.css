@@ -68,32 +68,12 @@
     filter: drop-shadow(0 8px 16px var(--img-hover-shadow));
 }
 
-/* Lightbox */
-.lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--lightbox-bg);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.3s ease;
-}
-
-.lightbox.visible {
-    opacity: 1;
-    pointer-events: all;
-}
-
+/* Lightbox Content */
 .lightbox-content {
     display: flex;
+    flex-wrap: wrap;
     max-width: 70%;
-    max-height: 70%;
+    max-height: 80%;
     background: var(--card-bg);
     border-radius: 12px;
     box-shadow: 0 8px 16px var(--shadow-color);
@@ -103,19 +83,23 @@
 
 /* Lightbox Left (Image) */
 .lightbox-left {
-    flex: 1;
-    background-color: var(--highlight-color);
+    flex: 1 1 50%; /* Take half of the container */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--card-bg);
 }
 
 .lightbox-left img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    width: 90%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
 }
 
 /* Lightbox Right (Metadata) */
 .lightbox-right {
-    flex: 1;
+    flex: 1 1 50%; /* Take half of the container */
     padding: 20px;
     display: flex;
     flex-direction: column;
@@ -128,19 +112,21 @@
 .lightbox-right h2 {
     font-size: 1.8rem;
     margin-bottom: 10px;
-    color: var(--highlight-color);
 }
 
 .lightbox-right p {
     font-size: 1rem;
     line-height: 1.6;
+    margin: 10px 0;
 }
 
+/* Close Button */
 .close-btn {
     position: absolute;
-    top: 20px;
+    top: 15px;
     right: 20px;
-    font-size: 2rem;
+    font-size: 1.8rem;
+    font-weight: bold;
     color: var(--highlight-color);
     cursor: pointer;
     transition: transform 0.3s ease;
@@ -148,16 +134,4 @@
 
 .close-btn:hover {
     transform: scale(1.2);
-}
-
-/* Animations */
-@keyframes lightbox-fade-in {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
 }
