@@ -5,18 +5,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const lightboxDescription = document.getElementById("lightbox-description");
     const closeBtn = document.querySelector(".close-btn");
 
+    // When an image is clicked, show the lightbox
     document.querySelectorAll(".gallery-item").forEach(item => {
         item.addEventListener("click", () => {
             const imageSrc = item.querySelector("img").src;
             const title = item.getAttribute("data-title");
             const description = item.getAttribute("data-description");
 
-            // Populate lightbox content
+            // Populate the lightbox content with the image and metadata
             lightboxImage.src = imageSrc;
             lightboxTitle.textContent = title || "No Title";
             lightboxDescription.textContent = description || "No Metadata Available";
 
-            // Show lightbox
+            // Show lightbox by adding the 'visible' class
             lightbox.classList.add("visible");
         });
     });
