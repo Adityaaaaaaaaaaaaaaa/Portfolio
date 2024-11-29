@@ -46,6 +46,7 @@
     box-shadow: 0 2px 4px var(--shadow-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+    height: fit-content;
 }
 
 .gallery-item:hover {
