@@ -1,83 +1,163 @@
-main {
-    padding: 20px;
+/* Root Variables for Colors */
+:root {
+    --text-color: #212529;
+    --highlight-color: #5f5e70; /* Cool purple */
+    --shadow-color: rgb(0, 0, 0);
+    --card-bg: rgb(152, 152, 152);
+    --lightbox-bg: rgba(0, 0, 0, 0.8);
+    --img-hover-shadow: rgb(255, 157, 0);
 }
 
+:root.dark-mode {
+    --text-color: #eaeaea;
+    --highlight-color: #ffb969;
+    --shadow-color: rgb(255, 255, 255);
+    --card-bg: #292929;
+    --lightbox-bg: rgba(0, 0, 0, 0.65);
+    --img-hover-shadow: rgb(0, 0, 255);
+}
+
+/* Gallery Section */
 .gallery {
+    padding: 30px 20px;
     text-align: center;
 }
 
 .gallery h1 {
+    font-size: 2.5rem;
     margin-bottom: 20px;
-    font-size: 2em;
+    color: var(--highlight-color);
 }
 
+/* Gallery Grid */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
-    margin: 20px auto;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 3%;
     max-width: 1200px;
+    margin: 0 auto;
 }
 
 .gallery-item {
-    overflow: hidden;
     position: relative;
+    border-radius: 12px;
+    overflow: visible;
+    /* background: var(--card-bg); */
+    background: transparent;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
+}
+
+.gallery-item:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 16px var(--shadow-color);
 }
 
 .gallery-item img {
     width: 100%;
+    height: auto;
+    display: block;
     transition: transform 0.3s ease;
+    filter: drop-shadow(0 2px 4px var(--shadow-color));
 }
 
 .gallery-item:hover img {
-    transform: scale(1.1);
+    transform: scale(1.075);
+    filter: drop-shadow(0 8px 16px var(--img-hover-shadow));
 }
 
-/* Lightbox styles */
+/* Lightbox */
 .lightbox {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
+    background: var(--lightbox-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     z-index: 1000;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
 }
 
+.lightbox.visible {
+    opacity: 1;
+    pointer-events: all;
+}
+
 .lightbox-content {
-    position: relative;
-    max-width: 90%;
-    max-height: 90%;
-    text-align: center;
+    display: flex;
+    max-width: 70%;
+    max-height: 70%;
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: 0 8px 16px var(--shadow-color);
+    overflow: hidden;
+    animation: lightbox-fade-in 0.4s ease;
 }
 
-.lightbox img {
-    max-width: 100%;
-    max-height: 70vh;
+/* Lightbox Left (Image) */
+.lightbox-left {
+    flex: 1;
+    background-color: var(--highlight-color);
 }
 
-.lightbox .lightbox-details {
-    margin-top: 10px;
-    color: white;
+.lightbox-left img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Lightbox Right (Metadata) */
+.lightbox-right {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: var(--highlight-color);
+    color: var(--text-color);
+    text-align: left;
+}
+
+.lightbox-right h2 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color: var(--highlight-color);
+}
+
+.lightbox-right p {
+    font-size: 1rem;
+    line-height: 1.6;
 }
 
 .close-btn {
     position: absolute;
-    top: 10px;
-    right: 10px;
-    font-size: 1.5rem;
-    color: white;
+    top: 20px;
+    right: 20px;
+    font-size: 2rem;
+    color: var(--highlight-color);
     cursor: pointer;
+    transition: transform 0.3s ease;
 }
 
-.lightbox.visible {
-    opacity: 1;
-    pointer-events: all;
+.close-btn:hover {
+    transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes lightbox-fade-in {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
 }
