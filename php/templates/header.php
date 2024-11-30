@@ -1,5 +1,7 @@
-<!-- header.php -->
 <?php
+// Start the session to access session variables
+session_start();
+
 // Define the navigation links in PHP
 $navLinks = [
     "Home" => "/Portfolio/home.php",
@@ -8,6 +10,9 @@ $navLinks = [
     "Resume" => "/Portfolio/pages/resume.php",
     "Contact" => "/Portfolio/pages/contact.php"
 ];
+
+// Check if the user is logged in
+$loggedIn = isset($_SESSION['admin_id']);
 ?>
 
 <!DOCTYPE html>
@@ -20,6 +25,15 @@ $navLinks = [
                 // Loop through the navigation links array and generate the list items
                 foreach ($navLinks as $name => $url) {
                     echo "<li><a href='$url' class='nav-link'>$name</a></li>";
+                }
+
+                // If logged in, show "Admin" and "Logout"
+                if ($loggedIn) {
+                    echo "<li><a href='/Portfolio/pages/admin.php' class='nav-link'>Admin</a></li>";
+                    echo "<li><a href='/Portfolio/php/logout.php' class='nav-link'>Logout</a></li>";
+                } else {
+                    // If not logged in, show "Login"
+                    echo "<li><a href='/Portfolio/pages/login.php' class='nav-link'>Login</a></li>";
                 }
                 ?>
                 <li id="toggle-btn"><a class="nav-link">Theme</a></li>
