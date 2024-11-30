@@ -22,20 +22,28 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             // Verify password
             if (password_verify($password, $user['password_hash'])) {
-                // Login successful: Set session variable and redirect to admin page
+                // Successful login
                 $_SESSION['username'] = $user['username'];
                 header("Location: ../../pages/admin.php");
                 exit();
             } else {
                 // Invalid password
-                $error = "Incorrect password.";
+                header("Location: ../../pages/404.php?error=pwd404");
+                exit();
             }
         } else {
             // Username not found
-            $error = "No user found with that username.";
+            header("Location: ../../pages/404.php?error=Uname404");
+            exit();
         }
     } catch (PDOException $e) {
-        $error = "Database error: " . $e->getMessage();
+        // Database error
+        header("Location: ../../pages/404.php?error=DB404");
+        exit();
     }
+} else {
+    // Invalid request method
+    header("Location: ../../pages/404.php");
+    exit();
 }
 ?>

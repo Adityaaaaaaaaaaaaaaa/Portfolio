@@ -8,7 +8,41 @@
     <link rel="stylesheet" href="../css/login.css">
     <link rel="stylesheet" href="../css/main.css">
     <script src="../js/dark_mode.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Real-time validation for both username and password
+            $('#username, #password').on('input', function() {
+                var username = $('#username').val();
+                var password = $('#password').val();
 
+                $.ajax({
+                    url: '../php/logic/login_ajax_input.php', // PHP file to handle both username and password validation
+                    method: 'POST',
+                    data: {
+                        username: username,
+                        password: password
+                    },
+                    success: function(response) {
+                        var errors = JSON.parse(response); // Parse the JSON response
+
+                        // Clear previous error messages
+                        $('#username-error').html('');
+                        $('#password-error').html('');
+
+                        // Append new error messages
+                        if (errors.usernameError) {
+                            $('#username-error').html(errors.usernameError);
+                        }
+
+                        if (errors.passwordError) {
+                            $('#password-error').html(errors.passwordError);
+                        }
+                    }    
+                });
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -20,8 +54,10 @@
             <form class="form" action="../php/logic/login_validation.php" method="POST">
                 <div id="login-lable">Login</div>
                 <input class="form-content" type="text" name="username" id="username" placeholder="UserName" />
+                <div id="username-error" class="error-message"></div> <!-- Error message display -->
                 <input class="form-content" type="password" name="password" id="password" placeholder="PassWord" />
-                <button type="submit">Continue</button>
+                <div id="password-error" class="error-message"></div> <!-- Error message display -->
+                <button>Continue</button>
             </form>
 
             <div id="rays">
