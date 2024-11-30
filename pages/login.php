@@ -12,33 +12,49 @@
     <script>
         $(document).ready(function() {
             // Real-time validation for both username and password
-            $('#username, #password').on('input', function() {
+            $('#username').on('input', function() {
                 var username = $('#username').val();
+
+                $.ajax({
+                    url: '../php/logic/login_ajax_input.php', // PHP file to handle username validation
+                    method: 'POST',
+                    data: {
+                        username: username
+                    },
+                    success: function(response) {
+                        var errors = JSON.parse(response); // Parse the JSON response
+
+                        // Clear previous username error messages
+                        $('#username-error').html('');
+
+                        // Append new username error message if there's an error
+                        if (errors.usernameError) {
+                            $('#username-error').html(errors.usernameError);
+                        }
+                    }
+                });
+            });
+
+            $('#password').on('input', function() {
                 var password = $('#password').val();
 
                 $.ajax({
-                    url: '../php/logic/login_ajax_input.php', // PHP file to handle both username and password validation
+                    url: '../php/logic/login_ajax_input.php', // PHP file to handle password validation
                     method: 'POST',
                     data: {
-                        username: username,
                         password: password
                     },
                     success: function(response) {
                         var errors = JSON.parse(response); // Parse the JSON response
 
-                        // Clear previous error messages
-                        $('#username-error').html('');
+                        // Clear previous password error messages
                         $('#password-error').html('');
 
-                        // Append new error messages
-                        if (errors.usernameError) {
-                            $('#username-error').html(errors.usernameError);
-                        }
-
+                        // Append new password error message if there's an error
                         if (errors.passwordError) {
                             $('#password-error').html(errors.passwordError);
                         }
-                    }    
+                    }
                 });
             });
         });
