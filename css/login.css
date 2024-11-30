@@ -92,7 +92,7 @@ button {
     background: #ffa564;
     font-size: 1em;
     height: 3.5rem;
-    letter-spacing: 0.3rem;
+    letter-spacing: 0.2rem;
     color: #fff;
     border: 3px solid #fec195;
     border-radius: 8px;
@@ -206,7 +206,7 @@ button:hover .star-3 {
 button:hover .star-4 {
     position: absolute;
     top: 30%;
-    left: 80%;
+    left: 90%;
     width: 8px;
     height: auto;
     filter: drop-shadow(0 0 10px #fffdef);
