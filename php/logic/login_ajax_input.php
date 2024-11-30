@@ -7,54 +7,64 @@ $errors = [
     'passwordError' => ''
 ];
 
-// Check if it's a request for username or password validation
+// Check if it's a POST request
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Handle username validation if it is sent
     if (isset($_POST['username'])) {
         $username = htmlspecialchars(trim($_POST['username']));
         
-        // Validate username
-        if (strlen($username) < 3) {
-            $errors['usernameError'] = "Username error: Username must be at least 3 characters long.";
+        if (empty($username)) {
+            $errors['usernameError'] = "Username field is as empty as my fridge on a Sunday!";
+        } elseif (strlen($username) < 3) {
+            $errors['usernameError'] = "You know its short ? do you ?";
+        } elseif (strlen($username) > 15) {
+            $errors['usernameError'] = "You know its long ? do you ?<br>You sure you remember your username ?";
         } else {
-            // Check if the username exists in the database
             try {
+                // Check if the username exists in the database
                 $sql = "SELECT username FROM adminx WHERE username = :username";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindParam(':username', $username);
                 $stmt->execute();
 
                 if ($stmt->rowCount() == 0) {
-                    $errors['usernameError'] = "Username error: This username does not exist.";
+                    $errors['usernameError'] = "This username seems to be as real as unicorns! or maybe is it ...?";
+                } else {
+                    $errors['usernameError'] = "Idk, maybe it's good ? maybe not ?";
                 }
             } catch (PDOException $e) {
-                $errors['usernameError'] = "Error code 500: Database error.";
+                $errors['usernameError'] = "Oops! A database gremlin struck (Error code 500).";
             }
         }
     }
 
+    // Handle password validation if it is sent
     if (isset($_POST['password'])) {
-        $password = trim($_POST['password']);
-        
-        // Validate password
-        if (strlen($password) < 3) {
-            $errors['passwordError'] = "Password error: Password must be at least 3 characters long.";
+        $password = $_POST['password'];
+
+        if (empty($password)) {
+            $errors['passwordError'] = "Password field is emptier than my wallet after payday!";
+        } elseif (strlen($password) < 3) {
+            $errors['passwordError'] = "Your password is shorter than my patience in traffic!";
+        } elseif (strlen($password) > 20) {
+            $errors['passwordError'] = "That's a long password for a small field!<br>Who knows ...? might be good or not ?";
         } else {
-            // Check if the password matches for the username
             try {
-                $sql = "SELECT password FROM adminx WHERE username = :username";
+                // Validate the password independently
+                $sql = "SELECT password FROM adminx WHERE password = :password";
                 $stmt = $pdo->prepare($sql);
-                $stmt->bindParam(':username', $username);
+                $stmt->bindParam(':password', $password);
                 $stmt->execute();
 
-                if ($stmt->rowCount() > 0) {
-                    $storedPassword = $stmt->fetchColumn(); // Get the stored password
-                    // Assuming you are using hashed passwords:
-                    if (!password_verify($password, $storedPassword)) {
-                        $errors['passwordError'] = "Password incorrect: The password you entered is incorrect.";
-                    }
+                if ($stmt->rowCount() == 0) {
+                    $errors['passwordError'] = "We can't tell if the password you just typed is correct or not. It's probably not?
+                    <br>Try your luck !";
+                } else {
+                    $errors['passwordError'] = "Idk, maybe it's good ? maybe not ? Try again ? ";
                 }
             } catch (PDOException $e) {
-                $errors['passwordError'] = "Error code 500: Database error.";
+                $errors['passwordError'] = "Oops! Our database took a nap (Error code 500).<br>Try see if it works ?";
             }
         }
     }
@@ -62,4 +72,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Return the errors as JSON
     echo json_encode($errors);
 }
-?>
