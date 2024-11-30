@@ -11,7 +11,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     try {
         // SQL query to get the stored credentials from the database
-        $sql = "SELECT id, username, password_hash FROM adminx WHERE username = :username";
+        $sql = "SELECT username, password_hash FROM adminx WHERE username = :username";
         $stmt = $pdo->prepare($sql);
         $stmt->bindParam(':username', $username);
         $stmt->execute();
@@ -23,7 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Verify password
             if (password_verify($password, $user['password_hash'])) {
                 // Login successful: Set session variable and redirect to admin page
-                $_SESSION['admin_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 header("Location: ../../pages/admin.php");
                 exit();
