@@ -15,47 +15,57 @@
             $('#username').on('input', function() {
                 var username = $('#username').val();
 
-                $.ajax({
-                    url: '../php/logic/login_ajax_input.php', // PHP file to handle username validation
-                    method: 'POST',
-                    data: {
-                        username: username
-                    },
-                    success: function(response) {
-                        var errors = JSON.parse(response); // Parse the JSON response
+                // Clear error if input is empty
+                if (username === '') {
+                    $('#username-error').html(''); // Clear error message
+                } else {
+                    $.ajax({
+                        url: '../php/logic/login_ajax_input.php', // PHP file to handle username validation
+                        method: 'POST',
+                        data: {
+                            username: username
+                        },
+                        success: function(response) {
+                            var errors = JSON.parse(response); // Parse the JSON response
 
-                        // Clear previous username error messages
-                        $('#username-error').html('');
+                            // Clear previous username error messages
+                            $('#username-error').html('');
 
-                        // Append new username error message if there's an error
-                        if (errors.usernameError) {
-                            $('#username-error').html(errors.usernameError);
+                            // Append new username error message if there's an error
+                            if (errors.usernameError) {
+                                $('#username-error').html(errors.usernameError);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
 
             $('#password').on('input', function() {
                 var password = $('#password').val();
 
-                $.ajax({
-                    url: '../php/logic/login_ajax_input.php', // PHP file to handle password validation
-                    method: 'POST',
-                    data: {
-                        password: password
-                    },
-                    success: function(response) {
-                        var errors = JSON.parse(response); // Parse the JSON response
+                // Clear error if input is empty
+                if (password === '') {
+                    $('#password-error').html(''); // Clear error message
+                } else {
+                    $.ajax({
+                        url: '../php/logic/login_ajax_input.php', // PHP file to handle password validation
+                        method: 'POST',
+                        data: {
+                            password: password
+                        },
+                        success: function(response) {
+                            var errors = JSON.parse(response); // Parse the JSON response
 
-                        // Clear previous password error messages
-                        $('#password-error').html('');
+                            // Clear previous password error messages
+                            $('#password-error').html('');
 
-                        // Append new password error message if there's an error
-                        if (errors.passwordError) {
-                            $('#password-error').html(errors.passwordError);
+                            // Append new password error message if there's an error
+                            if (errors.passwordError) {
+                                $('#password-error').html(errors.passwordError);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             });
         });
     </script>
@@ -68,7 +78,7 @@
         <h2>Admin Login</h2>
         <div id="Container">
             <form class="form" action="../php/logic/login_validation.php" method="POST">
-                <div id="login-lable">Login</div>
+                <div id="login-text">Login</div>
                 <input class="form-content" type="text" name="username" id="username" placeholder="UserName" />
                 <div id="username-error" class="error-message"></div> <!-- Error message display -->
                 <input class="form-content" type="password" name="password" id="password" placeholder="PassWord" />
