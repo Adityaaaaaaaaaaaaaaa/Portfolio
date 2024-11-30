@@ -14,8 +14,8 @@
     $data = json_decode($json, true);
 
     // Get the appropriate greeting and phrase from the JSON data
-    $greeting = $data['greetings'][$hour];
-    $hourlyPhrase = $data['phrasesHourly'][$hour];
+    $greeting = $data['greetings'][$hour] ?? "Hello!"; // Default value as fallback
+    $hourlyPhrase = $data['phrasesHourly'][$hour] ?? "What a great time to visit!";
 ?>
 <!DOCTYPE html>
 <html lang="en">
