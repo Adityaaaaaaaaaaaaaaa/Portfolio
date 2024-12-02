@@ -13,6 +13,7 @@
     --timeline-text-hover: rgb(0, 0, 0);
     --buttonx-shadow: inset 0px 0px 25px rgb(119, 0, 255);
     --buttonx-border: 1px solid #ff0000;
+    --nothing-button-text-colour: rgba(255, 0, 0, .6);
 
 }
 
@@ -31,6 +32,7 @@
     --timeline-text-hover: rgb(235, 235, 235);
     --buttonx-shadow: inset 0px 0px 25px rgb(0, 255, 0);
     --buttonx-border: 1px solid #00a2ff;
+    --nothing-button-text-colour: rgba(255, 0, 170, 0.85);
 }
 
 /* About Hero Section */
@@ -319,7 +321,7 @@ select, button {
     width: 6px;
     height: 6px;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     border-radius: 100%;
 }
 
@@ -333,14 +335,15 @@ select, button {
     height: 33px;
     background-color: transparent;
     border-radius: 12px 22px 2px 2px;
-    border-right: solid 2px rgb(255, 0, 170);
+    border-right: solid 2px var(--nothing-button-text-colour);
     border-top: solid 2px transparent;
 }
 
 .icony .text-icony {
-    color: rgb(255, 0, 170);
+    color: var(--nothing-button-text-colour);
     position: absolute;
     font-size: 12px;
+    font-weight: bold;
     left: -37px;
     top: -38px;
 }
@@ -353,14 +356,14 @@ select, button {
 }
 
 .buttony:hover .icony svg {
-    border: solid 2px rgb(255, 0, 170);
+    border: solid 2px var(--nothing-button-text-colour);
 }
 
 .padding-lefty {
     position: absolute;
     width: 20px;
     height: 2px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     left: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -370,7 +373,7 @@ select, button {
     content: "";
     width: 2px;
     height: 10px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     position: absolute;
     left: 0;
     top: 50%;
@@ -381,7 +384,7 @@ select, button {
     content: "";
     width: 2px;
     height: 10px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     position: absolute;
     right: 0;
     top: 50%;
@@ -392,7 +395,7 @@ select, button {
     position: absolute;
     width: 30px;
     height: 2px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     left: -24px;
     top: 11px;
     transform: rotate(-50deg);
@@ -406,13 +409,14 @@ select, button {
     width: 6px;
     height: 6px;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     border-radius: 100%;
 }
 
 .padding-left-texty {
-    color: rgb(255, 0, 170);
+    color: var(--nothing-button-text-colour);
     font-size: 12px;
+    font-weight: bold;
     position: absolute;
     white-space: nowrap;
     transform: rotate(50deg);
@@ -424,7 +428,7 @@ select, button {
     position: absolute;
     width: 20px;
     height: 2px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     right: 0;
     top: 50%;
     transform: translateY(-50%);
@@ -434,7 +438,7 @@ select, button {
     content: "";
     width: 2px;
     height: 10px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     position: absolute;
     left: 0;
     top: 50%;
@@ -445,7 +449,7 @@ select, button {
     content: "";
     width: 2px;
     height: 10px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     position: absolute;
     right: 0;
     top: 50%;
@@ -456,7 +460,7 @@ select, button {
     position: absolute;
     width: 30px;
     height: 2px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     right: -24px;
     top: 11px;
     transform: rotate(50deg);
@@ -470,13 +474,14 @@ select, button {
     width: 6px;
     height: 6px;
     transform: translate(-50%, -50%);
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     border-radius: 100%;
 }
 
 .padding-right-texty {
-    color: rgb(255, 0, 170);
+    color: var(--nothing-button-text-colour);
     font-size: 12px;
+    font-weight: bold;
     position: absolute;
     white-space: nowrap;
     transform: rotate(-50deg);
@@ -497,7 +502,7 @@ select, button {
     height: 53px;
     background-color: transparent;
     border-radius: 0px 0px 22px 22px;
-    border-right: solid 2px rgb(255, 0, 170);
+    border-right: solid 2px var(--nothing-button-text-colour);
     border-bottom: solid 2px transparent;
 }
 
@@ -508,14 +513,15 @@ select, button {
     bottom: -20px;
     width: 6px;
     height: 6px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     border-radius: 100%;
 }
 
 .background-texty {
     position: absolute;
-    color: rgb(255, 0, 170);
+    color: var(--nothing-button-text-colour);
     font-size: 12px;
+    font-weight: bold;
     bottom: -70px;
     left: -115px;
 }
@@ -530,7 +536,7 @@ select, button {
     content: "";
     width: 15px;
     height: 15px;
-    border: solid 2px rgb(255, 0, 170);
+    border: solid 2px var(--nothing-button-text-colour);
     position: absolute;
     right: 0%;
     top: 0;
@@ -542,7 +548,7 @@ select, button {
     content: "";
     width: 2px;
     height: 25px;
-    background-color: rgb(255, 0, 170);
+    background-color: var(--nothing-button-text-colour);
     position: absolute;
     right: -10px;
     top: -15px;
@@ -551,8 +557,9 @@ select, button {
 
 .bordery .border-texty {
     position: absolute;
-    color: rgb(255, 0, 170);
+    color: var(--nothing-button-text-colour);
     font-size: 12px;
+    font-weight: bold;
     right: -112px;
     top: -30px;
     white-space: nowrap;
