@@ -77,7 +77,7 @@
     <div class="login-container">
         <h2>Admin Login</h2>
         <div id="Container">
-            <form class="form" action="../php/logic/login_validation.php" method="POST">
+            <form class="form" action="../php/logic/login_validation.php" method="POST" autocomplete="off">
                 <div id="login-text">Login</div>
                 <input class="form-content" type="text" name="username" id="username" placeholder="UserName" />
                 <div id="username-error" class="error-message"></div> <!-- Error message display -->
