@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,7 +8,7 @@
     <title>About Me</title>
     <link rel="stylesheet" href="../css/about.css">
     <link rel="stylesheet" href="../css/main.css">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
@@ -15,6 +16,7 @@
     <script src="../js/about.js" defer></script>
     <script src="../js/dark_mode.js"></script>
 </head>
+
 <body>
     <!-- Navbar -->
     <?php include('../php/templates/header.php'); ?>
@@ -70,21 +72,56 @@
         <h2>My Skills</h2>
         <div class="skills-container">
             <div class="skill">
-                <h3>Photography</h3>
+                <h3>Photography ?</h3>
                 <div class="skill-bar" data-skill="photo"></div>
             </div>
             <div class="skill">
-                <h3>Web Development</h3>
+                <h3>Coding ?</h3>
                 <div class="skill-bar" data-skill="web"></div>
             </div>
             <div class="skill">
-                <h3>Java</h3>
+                <h3>Design ?</h3>
                 <div class="skill-bar" data-skill="java"></div>
             </div>
         </div>
         <div class="button-container">
+            <button class="buttony">
+                <div class="icony">
+                    <span class="text-icony hidey">Icon</span>
+                    <svg
+                        class="css-i6dzq1"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                        fill="none"
+                        stroke-width="2"
+                        stroke="currentColor"
+                        height="24"
+                        width="24"
+                        viewBox="0 0 24 24">
+                        <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                    </svg>
+                </div>
+                <span class="titley"> 'Do nothing button' </span>
+                <div class="padding-lefty hidey">
+                    <div class="padding-left-liney">
+                        <span class="padding-left-texty">Left Padding</span>
+                    </div>
+                </div>
+                <div class="padding-righty hidey">
+                    <div class="padding-right-liney">
+                        <span class="padding-right-texty">Right Padding</span>
+                    </div>
+                </div>
+                <div class="backgroundy hidey">
+                    <span class="background-texty">Background</span>
+                </div>
+                <div class="bordery hidey">
+                    <span class="border-texty">Border Radius</span>
+                </div>
+            </button>
+
             <button id="buttonx" onclick="window.location.href = '/Portfolio/home.php';">
-                Learn more !
+                Learn more 👀!
             </button>
         </div>
     </section>
@@ -100,4 +137,5 @@
     <!-- Footer -->
     <?php include('../php/templates/footer.php'); ?>
 </body>
+
 </html>
