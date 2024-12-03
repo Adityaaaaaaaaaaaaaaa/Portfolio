@@ -18,8 +18,9 @@
 		<div class="text">
 			<div>ERROR</div>
 			<h1>404</h1>
-			<hr>
-			<div>Page Not Found</div>
+			<hr><br>
+			<div>Page Not Found</div><br>
+			<div>What did you do ?</div>
 		</div>
 
 		<div class="astronaut">

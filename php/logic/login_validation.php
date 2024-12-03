@@ -28,22 +28,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 exit();
             } else {
                 // Invalid password
-                header("Location: ../../pages/404.php?error=pwd404");
+                header("Location: ../../pages/404.php?error=p404");
                 exit();
             }
         } else {
             // Username not found
-            header("Location: ../../pages/404.php?error=Uname404");
+            header("Location: ../../pages/404.php?error=u404");
             exit();
         }
     } catch (PDOException $e) {
         // Database error
-        header("Location: ../../pages/404.php?error=DB404");
+        header("Location: ../../pages/404.php?error=d404");
         exit();
     }
 } else {
     // Invalid request method
-    header("Location: ../../pages/404.php");
+    header("Location: ../../pages/404.php?error=404?");
     exit();
 }
 ?>
