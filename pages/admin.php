@@ -4,7 +4,8 @@
 
     // Check if the admin is logged in
     if (!isset($_SESSION['username'])) {
-        header("Location: 404.php?error=ua404");
+        $_SESSION['error'] = 'ua404';
+        header("Location: 404.php");
         exit();
     }
 ?>
