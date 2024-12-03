@@ -14,7 +14,7 @@ try {
     echo "Admin table created successfully.<br>";
 
     // Default admin credentials
-    $username = 'aditya';
+    $username = 'Aditya';
     $password = 'aditya1234';
 
     // Check if the admin username already exists
