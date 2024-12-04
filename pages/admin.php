@@ -11,62 +11,6 @@ if (!isset($_SESSION['username'])) {
 // Database connection
 include '../php/db/connect/conn.php';
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Handle the photo upload
-    if (isset($_FILES['photo'])) {
-        $file = $_FILES['photo'];
-        $description = $_POST['description'];
-
-        // Get file details
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
-        $fileSize = $file['size'];
-        $fileType = $file['type'];
-        $fileError = $file['error'];
-
-        // Set upload directory
-        $uploadDir = "../upload/";
-        $filePath = $uploadDir . basename($fileName);
-
-        // Check for file errors
-        if ($fileError === 0) {
-            if ($fileSize < 10485760) { // 10MB limit
-                // Move file to the uploads folder
-                if (move_uploaded_file($fileTmpName, $filePath)) {
-                    // Get image dimensions
-                    list($width, $height) = getimagesize($filePath);
-
-                    try {
-                        // Insert metadata into the database
-                        $stmt = $pdo->prepare("
-                            INSERT INTO photos (image_path, file_name, file_size, width, height, description, mime_type) 
-                            VALUES (:image_path, :file_name, :file_size, :width, :height, :description, :mime_type)
-                        ");
-                        $stmt->execute([
-                            ':image_path' => $filePath,
-                            ':file_name' => $fileName,
-                            ':file_size' => $fileSize,
-                            ':width' => $width,
-                            ':height' => $height,
-                            ':description' => $description,
-                            ':mime_type' => $fileType,
-                        ]);
-                        echo "Photo uploaded successfully!";
-                    } catch (PDOException $e) {
-                        echo "Error uploading photo: " . $e->getMessage();
-                    }
-                } else {
-                    echo "Failed to move the uploaded file.";
-                }
-            } else {
-                echo "File size exceeds the limit (10MB).";
-            }
-        } else {
-            echo "There was an error uploading the file.";
-        }
-    }
-}
-
 // Fetch photos for display in the admin panel
 try {
     $query = "SELECT * FROM photos";
@@ -94,24 +38,17 @@ try {
     <h1 class="title">Welcome, <?php echo $_SESSION['username']; ?>!</h1>
     <p class="title">You are now logged in as an admin.</p>
 
-
+    <!-- File Selection Section -->
     <div class="form-container">
-        <form class="form" action="admin.php" method="POST" enctype="multipart/form-data">
-            <span class="form-title">Select Photo:</span>
-            <p class="form-paragraph">File should be an image</p>
+        <form id="file-form" class="form" enctype="multipart/form-data">
+            <span class="form-title">Select Photos:</span>
+            <p class="form-paragraph">File should be images.</p>
             <label for="file-input" class="drop-container">
                 <span class="drop-title">Drop files here</span>
                 or
-                <input type="file" name="photo" id="photo" accept="image/*" multiple required="" class="file-input">
+                <input type="file" id="file-input" accept="image/*" multiple required class="file-input">
             </label>
-            <br>
-            <label for="description" class="form-paragraph">Description:<br>
-                <span class="form-paragraph">
-                    <input type="text" name="description" class="description-input" id="description" placeholder="Enter description" required>
-                </span>
-            </label>
-            <br>
-            <button type="submit" class="next-button">
+            <button type="button" class="next-button" id="next-button">
                 <span class="labelx">Next</span>
                 <span class="iconx">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
@@ -123,7 +60,17 @@ try {
         </form>
     </div>
 
-    <!-- Display Photos with Metadata -->
+    <!-- Manage Section -->
+    <h2 class="title">Manage Selected Photos</h2>
+    <div id="manage-section" class="photo-gallery">
+        <!-- Files will be dynamically displayed here -->
+    </div>
+    <div id="batch-buttons" style="display: none;">
+        <button id="upload-all" class="action-button">Upload All</button>
+        <button id="remove-all" class="action-button">Remove All</button>
+    </div>
+
+    <!-- Display Existing Photos with Metadata -->
     <h2 class="title">Manage Uploaded Photos</h2>
     <div class="photo-gallery">
         <?php while ($row = $result->fetch(PDO::FETCH_ASSOC)): ?>
@@ -143,6 +90,103 @@ try {
     </div>
 
     <?php include '../php/templates/footer.php'; ?>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fileInput = document.getElementById("file-input");
+            const nextButton = document.getElementById("next-button");
+            const manageSection = document.getElementById("manage-section");
+            const batchButtons = document.getElementById("batch-buttons");
+            const uploadAllBtn = document.getElementById("upload-all");
+            const removeAllBtn = document.getElementById("remove-all");
+            const filesList = new Map(); // Store files for reference
+
+            // Handle "Next" button click
+            nextButton.addEventListener("click", () => {
+                const files = Array.from(fileInput.files);
+                if (!files.length) {
+                    alert("Please select at least one file.");
+                    return;
+                }
+                files.forEach((file, index) => {
+                    const fileId = `${file.name}-${index}`;
+                    if (filesList.has(fileId)) return;
+
+                    // Store file reference
+                    filesList.set(fileId, file);
+
+                    // Create file card
+                    const fileCard = document.createElement("div");
+                    fileCard.className = "photo-item";
+                    fileCard.id = fileId;
+
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        fileCard.innerHTML = `
+                            <img src="${e.target.result}" alt="${file.name}" width="100">
+                            <p><strong>Name:</strong> ${file.name}</p>
+                            <p><strong>Size:</strong> ${file.size} bytes</p>
+                            <p><strong>Description:</strong> 
+                                <input type="text" class="description-input" placeholder="Enter description">
+                            </p>
+                            <button class="upload-button">Upload</button>
+                            <button class="remove-button">Remove</button>
+                        `;
+                        manageSection.appendChild(fileCard);
+                        batchButtons.style.display = "block";
+
+                        // Add event listeners for buttons
+                        fileCard.querySelector(".upload-button").addEventListener("click", () => handleUpload(fileId));
+                        fileCard.querySelector(".remove-button").addEventListener("click", () => handleRemove(fileId));
+                    };
+                    reader.readAsDataURL(file);
+                });
+            });
+
+            const handleUpload = (fileId) => {
+                const file = filesList.get(fileId);
+                if (!file) return;
+
+                const fileCard = document.getElementById(fileId);
+                const description = fileCard.querySelector(".description-input").value;
+
+                const formData = new FormData();
+                formData.append("photo", file);
+                formData.append("description", description);
+
+                fetch("../php/logic/upload_file.php", {
+                    method: "POST",
+                    body: formData,
+                })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        if (data.success) {
+                            fileCard.querySelector(".upload-button").disabled = true;
+                            alert("File uploaded successfully!");
+                        } else {
+                            alert("Upload failed: " + data.message);
+                        }
+                    });
+            };
+
+            const handleRemove = (fileId) => {
+                const fileCard = document.getElementById(fileId);
+                fileCard.remove();
+                filesList.delete(fileId);
+
+                if (filesList.size === 0) batchButtons.style.display = "none";
+            };
+
+            uploadAllBtn.addEventListener("click", () => {
+                filesList.forEach((_, fileId) => handleUpload(fileId));
+            });
+
+            removeAllBtn.addEventListener("click", () => {
+                filesList.forEach((_, fileId) => handleRemove(fileId));
+            });
+        });
+    </script>
 </body>
 
 </html>
