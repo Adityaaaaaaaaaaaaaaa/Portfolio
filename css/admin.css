@@ -165,3 +165,33 @@
     top: 0;
     opacity: 1;
 }
+
+.scrollable-window {
+    max-height: 300px; /* Adjust height as needed */
+    overflow-y: auto;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #f9f9f9;
+    border-radius: 5px;
+}
+
+/* Example animation styling for smooth scrolling */
+.photo-gallery {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 15px;
+}
+.photo-item {
+    flex: 0 0 auto;
+    width: 150px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    text-align: center;
+}
+.photo-item img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
