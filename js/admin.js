@@ -34,10 +34,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 <img src="${URL.createObjectURL(file)}" alt="${file.name}" width="100" height="100">
             </div>
             <div class="photo-middle">
-                <p><strong>Name:</strong> <input type="text" value="${file.name}" class="file-name"></p>
-                <p><strong>Size:</strong> ${formatFileSize(file.size)}</p>
-                <p><strong>Description:</strong> 
-                    <textarea class="file-description" rows="2" placeholder="Enter a description...">No description available for this image</textarea>
+                <p class="photo-text"><strong>Name:</strong> <input type="text" value="${file.name}" class="file-name-details"></p>
+                <p class="photo-text"><strong>Size:</strong> ${formatFileSize(file.size)}</p>
+                <p class="photo-text"><strong>Description:</strong> 
+                    <textarea class="file-name-details file-description" rows="2" placeholder="Enter a description...">No description available for this image</textarea>
                 </p>
             </div>
             <div class="photo-right">

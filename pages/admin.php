@@ -58,8 +58,8 @@ if (!isset($_SESSION['username'])) {
             <div id="photoPreviewList" class="photo-gallery"></div>
         </div>
         <div class="actions">
-            <button id="uploadAllButton" class="action-button">Upload All</button>
-            <button id="removeAllButton" class="action-button">Remove All</button>
+            <button id="uploadAllButton" class="action-button-all">Upload All</button>
+            <button id="removeAllButton" class="action-button-all">Remove All</button>
         </div>
     </div>
 
