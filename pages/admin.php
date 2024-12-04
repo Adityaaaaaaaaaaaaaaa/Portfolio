@@ -55,7 +55,7 @@ if (!isset($_SESSION['username'])) {
     <div id="photoPreviewContainer" class="photo-preview-container hidden">
         <h2 class="title">Manage Selected Photos</h2>
         <div class="photo-preview-scroll">
-            <div id="photoPreviewList"></div>
+            <div id="photoPreviewList" class="photo-gallery"></div>
         </div>
         <div class="actions">
             <button id="uploadAllButton" class="action-button">Upload All</button>

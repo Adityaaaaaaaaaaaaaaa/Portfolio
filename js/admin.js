@@ -18,55 +18,76 @@ document.addEventListener("DOMContentLoaded", () => {
     // Handle file input change
     photoInput.addEventListener("change", (event) => {
         Array.from(event.target.files).forEach((file) => {
-            if (!selectedFiles.find((f) => f.name === file.name)) {
-                selectedFiles.push(file);
-                displayFile(file);
+            if (!selectedFiles.find((f) => f.file.name === file.name)) {
+                selectedFiles.push({ file, description: "No description available for this image" });
+                renderPhotoRow(file);
             }
         });
     });
 
-    // Display a file in the preview list
-    function displayFile(file) {
+    // Render a photo row
+    function renderPhotoRow(file) {
         const fileRow = document.createElement("div");
-        fileRow.classList.add("photo-item");
-
-        // Calculate file size in KB or MB
-        const fileSize =
-            file.size >= 1024 * 1024
-                ? `${(file.size / (1024 * 1024)).toFixed(2)} MB`
-                : `${(file.size / 1024).toFixed(2)} KB`;
-
+        fileRow.classList.add("photo-row");
         fileRow.innerHTML = `
-            <img src="${URL.createObjectURL(file)}" alt="${file.name}" width="100">
-            <p><strong>Name:</strong> <input type="text" value="${file.name}" class="file-name"></p>
-            <p><strong>Size:</strong> ${fileSize}</p>
-            <p><strong>Type:</strong> ${file.type || "Unknown"}</p>
-            <p><strong>Last Modified:</strong> ${
-                file.lastModifiedDate ? file.lastModifiedDate.toLocaleString() : "Unknown"
-            }</p>
-            <button class="upload-button action-button">Upload</button>
-            <button class="remove-button action-button">Remove</button>
+            <div class="photo-left">
+                <img src="${URL.createObjectURL(file)}" alt="${file.name}" width="100" height="100">
+            </div>
+            <div class="photo-middle">
+                <p><strong>Name:</strong> <input type="text" value="${file.name}" class="file-name"></p>
+                <p><strong>Size:</strong> ${formatFileSize(file.size)}</p>
+                <p><strong>Description:</strong> 
+                    <textarea class="file-description" rows="2" placeholder="Enter a description...">No description available for this image</textarea>
+                </p>
+            </div>
+            <div class="photo-right">
+                <button class="upload-button action-button">Upload</button>
+                <button class="remove-button action-button">Remove</button>
+            </div>
         `;
 
-        // Handle remove button
+        // Handle "Remove" button click for individual rows
         fileRow.querySelector(".remove-button").addEventListener("click", () => {
-            selectedFiles = selectedFiles.filter((f) => f.name !== file.name);
+            selectedFiles = selectedFiles.filter((f) => f.file.name !== file.name);
             fileRow.remove();
+            togglePreviewVisibility();
+        });
+
+        // Handle description input change
+        fileRow.querySelector(".file-description").addEventListener("input", (event) => {
+            const selectedFile = selectedFiles.find((f) => f.file.name === file.name);
+            selectedFile.description = event.target.value;
         });
 
         photoPreviewList.appendChild(fileRow);
+    }
+
+    // Format file size to KB or MB
+    function formatFileSize(size) {
+        return size >= 1024 * 1024
+            ? `${(size / (1024 * 1024)).toFixed(2)} MB`
+            : `${(size / 1024).toFixed(2)} KB`;
     }
 
     // Remove all files
     removeAllButton.addEventListener("click", () => {
         selectedFiles = [];
         photoPreviewList.innerHTML = "";
-        photoPreviewContainer.classList.add("hidden");
+        togglePreviewVisibility();
     });
 
-    // Upload all files (dummy path)
+    // Toggle visibility of the scrollable window
+    function togglePreviewVisibility() {
+        if (selectedFiles.length === 0) {
+            photoPreviewContainer.classList.add("hidden");
+        }
+    }
+
+    // Dummy upload for all files
     uploadAllButton.addEventListener("click", () => {
-        console.log("Dummy upload triggered for files:", selectedFiles);
+        selectedFiles.forEach((fileObj) => {
+            console.log("Dummy upload for:", fileObj.file.name, fileObj.description);
+        });
         alert("Dummy upload completed.");
     });
 });

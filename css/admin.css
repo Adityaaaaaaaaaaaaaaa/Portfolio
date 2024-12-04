@@ -182,7 +182,8 @@
     flex-wrap: nowrap;
     gap: 15px;
 }
-.photo-item {
+
+/*.photo-item {
     flex: 0 0 auto;
     width: 150px;
     padding: 10px;
@@ -190,7 +191,20 @@
     border: 1px solid #ccc;
     border-radius: 8px;
     text-align: center;
+}*/
+
+.photo-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
 }
+
+
 .photo-item img {
     max-width: 100%;
     height: auto;
@@ -233,4 +247,44 @@
 
 .action-button:hover {
     background-color: #0056b3;
+}
+
+.photo-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* Left section for image */
+.photo-left {
+    flex: 1;
+    text-align: center;
+}
+
+.photo-left img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Middle section for metadata */
+.photo-middle {
+    flex: 2;
+    padding: 0 15px;
+}
+
+/* Right section for actions */
+.photo-right {
+    flex: 1;
+    text-align: right;
+}
+
+/* Hide scrollable container when no files are selected */
+.hidden {
+    display: none;
 }
