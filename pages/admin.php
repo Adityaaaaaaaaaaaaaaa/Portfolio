@@ -102,14 +102,24 @@ try {
             <label for="file-input" class="drop-container">
                 <span class="drop-title">Drop files here</span>
                 or
-                <input type="file" name="photo" id="photo" accept="image/*" required="" class="file-input">
+                <input type="file" name="photo" id="photo" accept="image/*" multiple required="" class="file-input">
             </label>
-            <label for="description">Description:
+            <br>
+            <label for="description" class="form-paragraph">Description:<br>
                 <span class="form-paragraph">
-                    <input type="text" name="description" class="file-input" id="description" placeholder="Enter description" required>
+                    <input type="text" name="description" class="description-input" id="description" placeholder="Enter description" required>
                 </span>
             </label>
-            <button type="submit">Upload Photo</button>
+            <br>
+            <button type="submit" class="next-button">
+                <span class="labelx">Next</span>
+                <span class="iconx">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                        <path fill="none" d="M0 0h24v24H0z"></path>
+                        <path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                    </svg>
+                </span>
+            </button>
         </form>
     </div>
 
