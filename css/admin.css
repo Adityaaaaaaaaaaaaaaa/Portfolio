@@ -1,9 +1,43 @@
 :root {
-    --title-color: #535353;
+    --title-color: #383838;
+    --upload-form-bg: rgb(170, 169, 169);
+    --upload-form-border: 1px solid rgb(159, 159, 160);
+    --upload-form-shadow: 0 5px 30px rgb(134, 170, 255);
+    --upload-form-title-color: #333333;
+    --upload-form-paragraph-color: #262626;
+    --upload-drop-container-bg: #939393;
+    --upload-drop-container-border: 2px dashed rgb(67, 255, 67);
+    --upload-drop-container-bg-hover: rgba(0, 140, 255, 0.482);
+    --upload-drop-container-border-hover: rgba(255, 0, 0, 0.616);
+    --upload-drop-container-text-color: #262626;
+    --upload-drop-container-text-color-hover: #222;
+    --upload-file-input-bg: #d0cece;
+    --file-input-selector-btn: #084cdf;
+    --file-input-selector-btn-hover: #4f90ff;
+    --photo-row-bg: #cfcfcf;
+    --photo-previewcontainer-bg: #767676;
+    --photo-previewcontainer-border: 1px solid #ddd;
 }
 
 :root.dark-mode {
-    --title-color: #aaafb4;
+    --title-color: #cbcbcb;
+    --upload-form-bg: rgb(161, 161, 161);
+    --upload-form-border: 1px solid rgb(209, 209, 209);
+    --upload-form-shadow: 0 5px 30px rgb(175, 255, 223);
+    --upload-form-title-color: #494949;
+    --upload-form-paragraph-color: #3a3a3a;
+    --upload-drop-container-bg: #ababab;
+    --upload-drop-container-border: 2px dashed rgb(68, 137, 255);
+    --upload-drop-container-bg-hover: rgba(0, 140, 255, 0.164);
+    --upload-drop-container-border-hover: rgba(255, 0, 0, 0.616);
+    --upload-drop-container-text-color: #3a3a3a;
+    --upload-drop-container-text-color-hover: #222;
+    --upload-file-input-bg: #cbc7c7;
+    --file-input-selector-btn: #084cdf;
+    --file-input-selector-btn-hover: #4086ff;
+    --photo-row-bg: #cacaca;
+    --photo-previewcontainer-bg: #939393;
+    --photo-previewcontainer-border: 1px solid #ffffff;
 }
 
 .title {
@@ -19,9 +53,9 @@
 }
 
 .form {
-    background-color: #cccccc;
-    box-shadow: 0 5px 30px rgb(218, 229, 255);
-    border: 1px solid rgb(159, 159, 160);
+    background-color: var(--upload-form-bg);
+    box-shadow: var(--upload-form-shadow);
+    border: var(--upload-form-border);
     border-radius: 20px;
     padding: 2rem .7rem .7rem .7rem;
     text-align: center;
@@ -30,7 +64,7 @@
 }
 
 .form-title {
-    color: #000000;
+    color: var(--upload-form-title-color);
     font-size: 1.8rem;
     font-weight: 500;
 }
@@ -38,11 +72,11 @@
 .form-paragraph {
     margin-top: 10px;
     font-size: 0.9375rem;
-    color: rgb(105, 105, 105);
+    color: var(--upload-form-paragraph-color);
 }
 
 .drop-container {
-    background-color: #fff6f6;
+    background-color: var(--upload-drop-container-bg);
     position: relative;
     display: flex;
     gap: 10px;
@@ -52,23 +86,23 @@
     padding: 10px;
     margin-top: 2.1875rem;
     border-radius: 10px;
-    border: 2px dashed rgb(171, 202, 255);
+    border: var(--upload-drop-container-border);
     color: #444;
     cursor: pointer;
     transition: background .2s ease-in-out, border .2s ease-in-out;
 }
 
 .drop-container:hover {
-    background: rgba(0, 140, 255, 0.164);
-    border-color: rgba(17, 17, 17, 0.616);
+    background: var(--upload-drop-container-bg-hover);
+    border-color: var(--upload-drop-container-border-hover);
 }
 
 .drop-container:hover .drop-title {
-    color: #222;
+    color: var(--upload-drop-container-text-color-hover);
 }
 
 .drop-title {
-    color: #444;
+    color: var(--upload-form-paragraph-color);
     font-size: 20px;
     font-weight: bold;
     text-align: center;
@@ -78,9 +112,9 @@
 .file-input {
     width: 350px;
     max-width: 100%;
-    color: #444;
+    color: var(--upload-form-paragraph-color);
     padding: 2px;
-    background: #fff;
+    background: var(--upload-file-input-bg);
     border-radius: 10px;
     border: 1px solid rgba(8, 8, 8, 0.288);
 }
@@ -88,7 +122,7 @@
 .file-input::file-selector-button {
     margin-right: 20px;
     border: none;
-    background: #084cdf;
+    background: var(--file-input-selector-btn);
     padding: 10px 20px;
     border-radius: 10px;
     color: #fff;
@@ -97,18 +131,7 @@
 }
 
 .file-input::file-selector-button:hover {
-    background: #0d45a5;
-}
-
-.description-input {
-    width: 75%;
-    margin: 3% auto;
-    height: 1.5em;
-    color: #444;
-    padding: 3%;
-    background: #fff;
-    border-radius: 10px;
-    border: 1px solid rgba(8, 8, 8, 0.288);
+    background: var(--file-input-selector-btn-hover);
 }
 
 .next-button {
@@ -170,13 +193,8 @@
 .photo-preview-scroll {
     max-height: 19em;
     overflow-y: auto;
-    border: 1px solid #ff0000;
     padding: 20px;
     border-radius: 5px;
-}
-
-.action-button:hover {
-    background-color: #0056b3;
 }
 
 .photo-row {
@@ -184,8 +202,8 @@
     align-items: center;
     justify-content: space-evenly;
     padding: 0.5em;
-    border: 1px solid #ff0000;
-    background: #fff;
+    border: 1px dashed #ff0000;
+    background: var(--photo-row-bg);
     border-radius: 33px;
     margin: .5% 0;
 }
@@ -195,6 +213,7 @@
     text-align: center;
     margin: 0 3%;
     border: 1px solid black;
+    border-radius: 10px;
 }
 
 .photo-left img {
@@ -211,7 +230,6 @@
 .photo-right {
     flex: 1;
     text-align: center;
-    border: 1px solid green;
     margin: 0 2% 0 1%;
     padding: 1%;
 }
@@ -224,7 +242,7 @@
     height: 27.5em;
     overflow-y: auto;
     padding: 2em;
-    background: #f9f9f9;
+    background: var(--photo-previewcontainer-bg);
     border-radius: 25px;
     border: 1px solid #ddd;
     margin: 3% auto;
@@ -254,9 +272,11 @@
 
 .actions {
     margin: 1% auto;
+    display: flex;
+    justify-content: center;
 }
 
-.action-button {
+button.upload-button, button.remove-button {
     padding: 3%;
     color: white;
     background-color: #007bff;
@@ -266,18 +286,14 @@
     margin: 0 5%;
 }
 
-.action-button-all {
-    padding: 1%;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin: 0 3% 0 0;
+.upload-button:hover {
+    background-color: #7cff5f;
+    color: #000000;
 }
 
-.action-button:hover {
-    background-color: #0056b3;
+.remove-button:hover {
+    background-color: #fc5454;
+    color: #000000;
 }
 
 .photo-text{
@@ -291,4 +307,69 @@
     width: 65%;
     padding: 2%;
     text-align: left;
+}
+
+.action-button-upload {
+    background: #a370f0;
+    color: white;
+    font-family: inherit;
+    padding: 1% 4% 1% 1%;
+    border-radius: 0.9em;
+    border: none;
+    display: flex;
+    align-items: center;
+    box-shadow: inset 0 0 1.6em -0.6em #714da6;
+    overflow: hidden;
+    position: relative;
+    height: 3em;
+    cursor: pointer;
+    margin: 0 1%;
+}
+
+.action-button-upload .icon {
+    background: white;
+    margin-left: 1em;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.2em;
+    width: 2.2em;
+    border-radius: 0.7em;
+    box-shadow: 0.1em 0.1em 0.6em 0.2em #7b52b9;
+    right: 0.3em;
+    transition: all 0.3s;
+}
+
+.action-button-upload:hover .icon {
+    width: calc(100% - 0.6em);
+}
+
+.action-button-upload .icon svg {
+    width: 1.1em;
+    transition: transform 0.3s;
+    color: #7b52b9;
+}
+
+.action-button-upload:hover .icon svg {
+    transform: translateX(0.1em);
+}
+
+.action-button-upload:active .icon {
+    transform: scale(0.95);
+}
+
+/* remove all button */
+.action-button-remove {
+    padding: 1%;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 0.9em;
+    cursor: pointer;
+    margin: 0 5%;
+}
+
+.action-button-remove:hover {
+    background-color: #b30000;
 }

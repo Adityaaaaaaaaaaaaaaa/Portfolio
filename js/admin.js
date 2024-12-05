@@ -41,8 +41,8 @@ document.addEventListener("DOMContentLoaded", () => {
                 </p>
             </div>
             <div class="photo-right">
-                <button class="upload-button action-button">Upload</button>
-                <button class="remove-button action-button">Remove</button>
+                <button class="upload-button">Upload</button>
+                <button class="remove-button">Remove</button>
             </div>
         `;
 
