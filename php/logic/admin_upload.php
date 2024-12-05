@@ -9,10 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Validate and handle the uploaded file
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $fileTmpName = $_FILES['photo']['tmp_name'];
-            $fileName = $_FILES['photo']['name'];
+            //$fileName = $_FILES['photo']['name'];
             $fileSize = $_FILES['photo']['size'];
             $fileType = $_FILES['photo']['type'];
             $description = $_POST['description'] ?? 'No description';
+            $updatedFileName = $_POST['updatedFileName'] ?? $_FILES['photo']['name'];
+
 
             // Get image dimensions
             $imageSize = getimagesize($fileTmpName);
@@ -33,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Bind the parameters
             $stmt->bindParam(':image_data', $imageData, PDO::PARAM_LOB); // Bind binary data as LOB
-            $stmt->bindParam(':file_name', $fileName);
+            $stmt->bindParam(':file_name', $updatedFileName);
             $stmt->bindParam(':file_size', $fileSize);
             $stmt->bindParam(':width', $width);
             $stmt->bindParam(':height', $height);

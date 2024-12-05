@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function renderPhotoRow(file) {
         const fileRow = document.createElement("div");
         fileRow.classList.add("photo-row");
+        fileRow.setAttribute("data-filename", file.name); 
         fileRow.innerHTML = `
             <div class="photo-left">
                 <img src="${URL.createObjectURL(file)}" alt="${file.name}" width="100" height="100">
@@ -100,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
         let uploadedCount = 0;
         selectedFiles.forEach(({ file, description }) => {
-            uploadFile(file, description, () => {
+            const fileRow = photoPreviewList.querySelector(`.photo-row[data-filename="${file.name}"]`);
+            uploadFile(file, description, fileRow, () => {
                 uploadedCount++;
                 console.log(`Uploaded ${file.name}`);
                 if (uploadedCount === selectedFiles.length) {
@@ -118,10 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // Upload a single file
-    function uploadFile(file, description, onSuccess, onFailure) {
+    function uploadFile(file, description, fileRow, onSuccess, onFailure) {
+        const updatedFileName = fileRow.querySelector(".file-name-details").value;
+
         const formData = new FormData();
         formData.append("photo", file);
         formData.append("description", description);
+        formData.append("updatedFileName", updatedFileName); // Send updated name
 
         fetch("../php/logic/admin_upload.php", {
             method: "POST",
@@ -139,4 +144,5 @@ document.addEventListener("DOMContentLoaded", () => {
                 onFailure(error.message);
             });
     }
+
 });
