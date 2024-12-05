@@ -1,43 +1,61 @@
 <?php
+include_once '../db/connect/conn.php'; // Ensure that your DB connection is included
+
+// Set content type to JSON
 header('Content-Type: application/json');
-include '../db/connect/conn.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_FILES['photo']) && isset($_POST['description'])) {
-        $file = $_FILES['photo'];
-        $description = $_POST['description'];
+    try {
+        // Validate and handle the uploaded file
+        if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
+            $fileTmpName = $_FILES['photo']['tmp_name'];
+            $fileName = $_FILES['photo']['name'];
+            $fileSize = $_FILES['photo']['size'];
+            $fileType = $_FILES['photo']['type'];
+            $description = $_POST['description'] ?? 'No description';
 
-        $fileName = $file['name'];
-        $fileTmpName = $file['tmp_name'];
-        $fileSize = $file['size'];
-        $fileType = $file['type'];
+            // Get image dimensions
+            $imageSize = getimagesize($fileTmpName);
+            $width = $imageSize[0];
+            $height = $imageSize[1];
 
-        if ($fileSize < 10485760) { // 10MB limit
+            // Read the file's binary data
             $imageData = file_get_contents($fileTmpName);
-            list($width, $height) = getimagesizefromstring($imageData);
 
-            try {
-                $stmt = $pdo->prepare("
-                    INSERT INTO photos (image_path, file_name, file_size, width, height, description, mime_type) 
-                    VALUES (:image_path, :file_name, :file_size, :width, :height, :description, :mime_type)
-                ");
-                $stmt->execute([
-                    ':image_path' => 'data:' . $fileType . ';base64,' . base64_encode($imageData),
-                    ':file_name' => $fileName,
-                    ':file_size' => $fileSize,
-                    ':width' => $width,
-                    ':height' => $height,
-                    ':description' => $description,
-                    ':mime_type' => $fileType,
-                ]);
+            // SQL query to insert the data
+            $query = "
+                INSERT INTO photos (image_data, file_name, file_size, width, height, description, mime_type)
+                VALUES (:image_data, :file_name, :file_size, :width, :height, :description, :mime_type)
+            ";
 
-                echo json_encode(['success' => true]);
-            } catch (PDOException $e) {
-                echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+            // Prepare the query
+            $stmt = $pdo->prepare($query);
+
+            // Bind the parameters
+            $stmt->bindParam(':image_data', $imageData, PDO::PARAM_LOB); // Bind binary data as LOB
+            $stmt->bindParam(':file_name', $fileName);
+            $stmt->bindParam(':file_size', $fileSize);
+            $stmt->bindParam(':width', $width);
+            $stmt->bindParam(':height', $height);
+            $stmt->bindParam(':description', $description);
+            $stmt->bindParam(':mime_type', $fileType);
+
+            // Execute the query
+            if ($stmt->execute()) {
+                echo json_encode(['success' => true, 'message' => 'Image uploaded successfully!']);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to upload image.']);
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'File size exceeds the limit (10MB).']);
+            echo json_encode(['success' => false, 'message' => 'No valid file uploaded.']);
         }
+    } catch (PDOException $e) {
+        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
     }
+
+    // Close the database connection
+    $pdo = null;
+} else {
+    echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }
 ?>

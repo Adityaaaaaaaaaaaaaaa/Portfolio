@@ -8,6 +8,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let selectedFiles = [];
 
+    // Maximum of 15 files
+    const MAX_FILES = 15;
+
     // Handle "Next" button click
     nextButton.addEventListener("click", () => {
         if (selectedFiles.length > 0) {
@@ -17,6 +20,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Handle file input change
     photoInput.addEventListener("change", (event) => {
+        // If the user selects more than 15 files, limit them to 15
+        if (event.target.files.length + selectedFiles.length > MAX_FILES) {
+            alert(`You can only upload a maximum of ${MAX_FILES} files.`);
+            return;
+        }
+
         Array.from(event.target.files).forEach((file) => {
             if (!selectedFiles.find((f) => f.file.name === file.name)) {
                 selectedFiles.push({ file, description: "No description available for this image" });
@@ -41,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 </p>
             </div>
             <div class="photo-right">
-                <button class="upload-button">Upload</button>
                 <button class="remove-button">Remove</button>
             </div>
         `;
@@ -83,11 +91,52 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Dummy upload for all files
+    // Handle batch upload
     uploadAllButton.addEventListener("click", () => {
-        selectedFiles.forEach((fileObj) => {
-            console.log("Dummy upload for:", fileObj.file.name, fileObj.description);
+        if (selectedFiles.length === 0) {
+            console.log("No files to upload.");
+            return;
+        }
+
+        let uploadedCount = 0;
+        selectedFiles.forEach(({ file, description }) => {
+            uploadFile(file, description, () => {
+                uploadedCount++;
+                console.log(`Uploaded ${file.name}`);
+                if (uploadedCount === selectedFiles.length) {
+                    console.log("All files have been uploaded.");
+                    selectedFiles = [];
+                    photoPreviewList.innerHTML = "";
+                    togglePreviewVisibility();
+                    // Hide the modal and give feedback
+                    console.log("All files uploaded successfully!");
+                }
+            }, (error) => {
+                console.error(`Error uploading ${file.name}: ${error}`);
+            });
         });
-        alert("Dummy upload completed.");
     });
+
+    // Upload a single file
+    function uploadFile(file, description, onSuccess, onFailure) {
+        const formData = new FormData();
+        formData.append("photo", file);
+        formData.append("description", description);
+
+        fetch("../php/logic/admin_upload.php", {
+            method: "POST",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.success) {
+                    onSuccess();
+                } else {
+                    onFailure(data.message);
+                }
+            })
+            .catch((error) => {
+                onFailure(error.message);
+            });
+    }
 });
