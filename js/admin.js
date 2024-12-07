@@ -92,32 +92,85 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Handle batch upload
     uploadAllButton.addEventListener("click", () => {
         if (selectedFiles.length === 0) {
-            console.log("No files to upload.");
+            displayMessage("No files to upload.", false); // Show error
             return;
         }
-
+    
         let uploadedCount = 0;
+        let failedUploads = [];
+        const totalFiles = selectedFiles.length;
+    
         selectedFiles.forEach(({ file, description }) => {
             const fileRow = photoPreviewList.querySelector(`.photo-row[data-filename="${file.name}"]`);
-            uploadFile(file, description, fileRow, () => {
-                uploadedCount++;
-                console.log(`Uploaded ${file.name}`);
-                if (uploadedCount === selectedFiles.length) {
-                    console.log("All files have been uploaded.");
-                    selectedFiles = [];
-                    photoPreviewList.innerHTML = "";
-                    togglePreviewVisibility();
-                    // Hide the modal and give feedback
-                    console.log("All files uploaded successfully!");
+            uploadFile(
+                file,
+                description,
+                fileRow,
+                () => {
+                    uploadedCount++;
+                    console.log(`Uploaded ${file.name}`);
+                    if (uploadedCount + failedUploads.length === totalFiles) {
+                        handleUploadResults(uploadedCount, failedUploads);
+                    }
+                },
+                (error) => {
+                    console.error(`Error uploading ${file.name}: ${error}`);
+                    failedUploads.push(file.name);
+                    if (uploadedCount + failedUploads.length === totalFiles) {
+                        handleUploadResults(uploadedCount, failedUploads);
+                    }
                 }
-            }, (error) => {
-                console.error(`Error uploading ${file.name}: ${error}`);
-            });
+            );
         });
     });
+    
+    // Display upload results
+    function handleUploadResults(successCount, failedUploads) {
+        let message = `<strong>Upload Complete:</strong><br>`;
+        if (successCount > 0) {
+            message += `<span>${successCount} files uploaded successfully.</span><br>`;
+        }
+        if (failedUploads.length > 0) {
+            message += `<span>The following files failed to upload:</span><br><ul>`;
+            failedUploads.forEach((file) => {
+                message += `<li>${file}</li>`;
+            });
+            message += `</ul>`;
+        }
+        const isSuccess = failedUploads.length === 0;
+        displayMessage(message, isSuccess);
+    
+        // Reset UI if all uploads succeed
+        if (isSuccess) {
+            selectedFiles = [];
+            photoPreviewList.innerHTML = "";
+            togglePreviewVisibility();
+        }
+    }
+    
+    
+    // Utility function to display messages
+    function displayMessage(message, isSuccess) {
+        const messageContainer = document.getElementById("uploadMessages");
+        messageContainer.innerHTML = message; // Set message text
+        messageContainer.className = `upload-messages ${isSuccess ? "success" : "error"}`; // Apply styling class
+        messageContainer.style.display = "block"; // Show the message container
+
+        // Optionally hide the message after a delay
+        setTimeout(() => {
+            messageContainer.style.display = "none";
+        }, 5000);
+    }
+
+    
+    // Reset the scrollable preview window
+    function resetPreviewWindow() {
+        selectedFiles = [];
+        photoPreviewList.innerHTML = "";
+        togglePreviewVisibility();
+    }
 
     // Upload a single file
     function uploadFile(file, description, fileRow, onSuccess, onFailure) {

@@ -5,16 +5,15 @@ include_once '../db/connect/conn.php'; // Ensure that your DB connection is incl
 header('Content-Type: application/json');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $response = [];
     try {
         // Validate and handle the uploaded file
         if (isset($_FILES['photo']) && $_FILES['photo']['error'] === UPLOAD_ERR_OK) {
             $fileTmpName = $_FILES['photo']['tmp_name'];
-            //$fileName = $_FILES['photo']['name'];
             $fileSize = $_FILES['photo']['size'];
             $fileType = $_FILES['photo']['type'];
             $description = $_POST['description'] ?? 'No description';
             $updatedFileName = $_POST['updatedFileName'] ?? $_FILES['photo']['name'];
-
 
             // Get image dimensions
             $imageSize = getimagesize($fileTmpName);
@@ -44,19 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Execute the query
             if ($stmt->execute()) {
-                echo json_encode(['success' => true, 'message' => 'Image uploaded successfully!']);
+                $response = ['success' => true, 'message' => 'Image have been uploaded successfully!', 'file' => $updatedFileName];
             } else {
-                echo json_encode(['success' => false, 'message' => 'Failed to upload image.']);
+                $response = ['success' => false, 'message' => 'Failed to upload image.', 'file' => $updatedFileName];
             }
         } else {
-            echo json_encode(['success' => false, 'message' => 'No valid file uploaded.']);
+            $response = ['success' => false, 'message' => 'No valid file uploaded.', 'file' => 'Unknown'];
         }
     } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'message' => 'Database error: ' . $e->getMessage()]);
+        $response = ['success' => false, 'message' => 'Database error: ' . $e->getMessage(), 'file' => 'Unknown'];
     }
 
     // Close the database connection
     $pdo = null;
+
+    echo json_encode($response);
+    exit();
 } else {
     echo json_encode(['success' => false, 'message' => 'Invalid request method.']);
 }

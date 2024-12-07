@@ -51,6 +51,9 @@ if (!isset($_SESSION['username'])) {
         </form>
     </div>
 
+    <!-- Message container for displaying upload results -->
+    <div id="uploadMessages" class="upload-messages hidden"></div>
+
     <!-- Scrollable Photo Preview -->
     <div id="photoPreviewContainer" class="photo-preview-container hidden">
         <h2 class="title">Manage Selected Photos</h2>
