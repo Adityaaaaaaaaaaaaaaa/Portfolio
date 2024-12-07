@@ -32,10 +32,10 @@ try {
             <div class="gallery-grid">
                 <?php if (!empty($photos)): ?>
                     <?php foreach ($photos as $photo): ?>
-                        <div class="gallery-item"
-                            data-title="<?= htmlspecialchars($photo['file_name']) ?>"
-                            data-description="<?= htmlspecialchars($photo['description']) ?>">
-                            <img src="../php/logic/portfolio_fetch.php?id=<?= $photo['id'] ?>"
+                        <div class="gallery-item" 
+                            data-id="<?= $photo['id'] ?>"
+                            data-image-src="../php/logic/portfolio_fetch_image.php?id=<?= $photo['id'] ?>">
+                            <img src="../php/logic/portfolio_fetch_image.php?id=<?= $photo['id'] ?>"
                                 alt="<?= htmlspecialchars($photo['file_name']) ?>">
                         </div>
                     <?php endforeach; ?>
@@ -48,13 +48,21 @@ try {
         <!-- Popup/Lightbox -->
         <div id="lightbox" class="lightbox">
             <div class="lightbox-content">
+                <!-- Left: Mini Image Section -->
                 <div class="lightbox-left">
                     <img id="lightbox-image" src="" alt="Selected Image" />
                 </div>
+                
+                <!-- Right: Details Section -->
                 <div class="lightbox-right">
-                    <h2 id="lightbox-title">Image Title</h2>
-                    <p id="lightbox-description">Description or Metadata</p>
+                    <h3 id="lightbox-title">No Title Available</h3>
+                    <p id="lightbox-description">No description available</p>
+                    <p id="lightbox-file-size">File Size: N/A</p>
+                    <p id="lightbox-dimensions">Dimensions: N/A</p>
+                    <p id="lightbox-upload-date">Upload Date: N/A</p>
                 </div>
+                
+                <!-- Close Button -->
                 <div class="close-btn">&times;</div>
             </div>
         </div>
