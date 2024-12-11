@@ -1,15 +1,20 @@
 <?php
-require_once '../php/db/connect/conn.php'; // Adjust the path if necessary
+require_once '../php/db/connect/conn.php';
+session_start();
 
+// Fetch photos from the database
 try {
-    // Fetch images from the database
     $stmt = $pdo->query("SELECT id, file_name, description FROM photos");
     $photos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 } catch (PDOException $e) {
     echo "Error fetching photos: " . $e->getMessage();
-    exit; // Stop execution if there's a database error
+    exit;
 }
+
+// Check if an admin is logged in
+$isAdmin = isset($_SESSION['username']);
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -33,9 +38,9 @@ try {
                 <?php if (!empty($photos)): ?>
                     <?php foreach ($photos as $photo): ?>
                         <div class="gallery-item" 
-                            data-id="<?= $photo['id'] ?>"
-                            data-image-src="../php/logic/portfolio_fetch_image.php?id=<?= $photo['id'] ?>">
-                            <img src="../php/logic/portfolio_fetch_image.php?id=<?= $photo['id'] ?>"
+                            data-id="<?= htmlspecialchars($photo['id']) ?>"
+                            data-image-src="../php/logic/portfolio_fetch_image.php?id=<?= htmlspecialchars($photo['id']) ?>">
+                            <img src="../php/logic/portfolio_fetch_image.php?id=<?= htmlspecialchars($photo['id']) ?>"
                                 alt="<?= htmlspecialchars($photo['file_name']) ?>">
                         </div>
                     <?php endforeach; ?>
@@ -45,24 +50,31 @@ try {
             </div>
         </section>
 
-        <!-- Popup/Lightbox -->
+        <!-- Lightbox Popup -->
         <div id="lightbox" class="lightbox">
             <div class="lightbox-content">
-                <!-- Left: Mini Image Section -->
                 <div class="lightbox-left">
                     <img id="lightbox-image" src="" alt="Selected Image" />
                 </div>
-                
-                <!-- Right: Details Section -->
                 <div class="lightbox-right">
                     <h3 id="lightbox-title">No Title Available</h3>
                     <p id="lightbox-description">No description available</p>
-                    <p id="lightbox-file-size">File Size: N/A</p>
-                    <p id="lightbox-dimensions">Dimensions: N/A</p>
-                    <p id="lightbox-upload-date">Upload Date: N/A</p>
+                    <?php if ($isAdmin): ?>
+                        <div id="admin-controls">
+                            <button id="edit-btn">Edit</button>
+                            <button id="delete-btn">Delete</button>
+                            <div id="edit-controls" style="display: none;">
+                                <input type="text" id="edit-title" placeholder="Edit Title">
+                                <textarea id="edit-description" placeholder="Edit Description"></textarea>
+                                <button id="save-btn">Save</button>
+                                <button id="cancel-btn">Cancel</button>
+                            </div>
+                            <div id="lightbox-message" style="margin-top: 10px; font-size: 14px;"></div>
+                        </div>
+                    <?php else: ?>
+                        <button id="download-btn">Download</button>
+                    <?php endif; ?>
                 </div>
-                
-                <!-- Close Button -->
                 <div class="close-btn">&times;</div>
             </div>
         </div>
