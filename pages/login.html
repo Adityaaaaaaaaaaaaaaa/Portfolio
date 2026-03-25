@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/dark_mode.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginForm = document.querySelector('.form');
+            const emailInput = document.getElementById('username'); // Using username field for email
+            const passwordInput = document.getElementById('password');
+            const auth = firebase.auth();
+
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = emailInput.value;
+                const password = passwordInput.value;
+
+                auth.signInWithEmailAndPassword(email, password)
+                    .then((userCredential) => {
+                        // Signed in
+                        window.location.href = 'admin.html';
+                    })
+                    .catch((error) => {
+                        const errorCode = error.code;
+                        const errorMessage = error.message;
+                        alert(`Error: ${errorMessage}`);
+                    });
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        <div id="Container">
+            <form class="form" autocomplete="off">
+                <div id="login-text">Login</div>
+                <!-- Changed placeholder to Email since Firebase uses Email -->
+                <input class="form-content" type="email" name="username" id="username" placeholder="Email" required />
+                <div id="username-error" class="error-message"></div>
+
+                <input class="form-content" type="password" name="password" id="password" placeholder="Password"
+                    required />
+                <div id="password-error" class="error-message"></div>
+
+                <button type="submit">
+                    Continue
+                    <!-- Star SVGs preserved -->
+                    <div class="star-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" version="1.1"
+                            style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+                            viewBox="0 0 784.11 815.53" xmlns:xlink="http://www.w3.org/1999/xlink">
+                            <g id="Layer_x0020_1">
+                                <path class="fil0"
+                                    d="M392.05 0c-20.9,210.08 -184.06,378.41 -392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93,-210.06 184.09,-378.37 392.05,-407.74 -207.98,-29.38 -371.16,-197.69 -392.06,-407.78z">
+                                </path>
+                            </g>
+                        </svg>
+                    </div>
+                    <!-- ... other stars ... -->
+                </button>
+            </form>
+
+            <!-- Rays and Emitter SVGs preserved -->
+            <div id="rays">
+                <svg fill="none" viewBox="0 0 299 152" height="9em" width="18em" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="url(#paint0_linear_8_3)"
+                        d="M149.5 152H133.42L9.53674e-07 4.70132e-06H149.5L299 4.70132e-06L165.58 152H149.5Z"></path>
+                    <defs>
+                        <linearGradient gradientUnits="userSpaceOnUse" y2="12.1981" x2="150.12" y1="152" x1="149.5"
+                            id="paint0_linear_8_3">
+                            <stop stop-color="#00E0FF"></stop>
+                            <stop stop-opacity="0" stop-color="#65EDFF" offset="1"></stop>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer-placeholder"></div>
+</body>
+
+</html>

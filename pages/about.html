@@ -12,14 +12,19 @@
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/main.js" defer></script>
     <script src="../js/about.js" defer></script>
     <script src="../js/dark_mode.js"></script>
 </head>
 
 <body>
-    <!-- Navbar -->
-    <?php include('../php/templates/header.php'); ?>
+    <div id="header-placeholder"></div>
 
     <!-- Hero Section -->
     <header class="about-hero">
@@ -37,7 +42,6 @@
             </select>
             <button id="fetch-quote-btn">Fetch Quote</button>
         </div>
-
     </header>
 
     <!-- Interactive Timeline Section -->
@@ -88,16 +92,8 @@
             <button class="buttony">
                 <div class="icony">
                     <span class="text-icony hidey">Icon</span>
-                    <svg
-                        class="css-i6dzq1"
-                        stroke-linejoin="round"
-                        stroke-linecap="round"
-                        fill="none"
-                        stroke-width="2"
-                        stroke="currentColor"
-                        height="24"
-                        width="24"
-                        viewBox="0 0 24 24">
+                    <svg class="css-i6dzq1" stroke-linejoin="round" stroke-linecap="round" fill="none" stroke-width="2"
+                        stroke="currentColor" height="24" width="24" viewBox="0 0 24 24">
                         <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
                     </svg>
                 </div>
@@ -120,7 +116,7 @@
                 </div>
             </button>
 
-            <button id="buttonx" onclick="window.location.href = '/Portfolio/home.php';">
+            <button id="buttonx" onclick="window.location.href = '../index.html';">
                 Learn more 👀!
             </button>
         </div>
@@ -134,8 +130,7 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <?php include('../php/templates/footer.php'); ?>
+    <div id="footer-placeholder"></div>
 </body>
 
 </html>

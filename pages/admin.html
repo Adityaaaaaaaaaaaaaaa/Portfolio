@@ -1,14 +1,3 @@
-<?php
-session_start();
-
-// Check if the admin is logged in
-if (!isset($_SESSION['username'])) {
-    $_SESSION['error'] = 'ua404';
-    header("Location: 404.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,14 +7,36 @@ if (!isset($_SESSION['username'])) {
     <title>Admin Dashboard</title>
     <link rel="stylesheet" href="../css/admin.css">
     <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-storage.js"></script>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/main.js" defer></script>
     <script src="../js/dark_mode.js"></script>
     <script src="../js/admin.js" defer></script>
+
+    <script>
+        // Protect Route
+        document.addEventListener('DOMContentLoaded', () => {
+            firebase.auth().onAuthStateChanged(user => {
+                if (!user) {
+                    window.location.href = 'login.html';
+                } else {
+                    document.getElementById('admin-email').textContent = user.email;
+                }
+            });
+        });
+    </script>
 </head>
 
 <body>
-    <?php include '../php/templates/header.php'; ?>
+    <div id="header-placeholder"></div>
 
-    <h1 class="title">Welcome, <?php echo $_SESSION['username']; ?>!</h1>
+    <h1 class="title">Welcome, <span id="admin-email">Admin</span>!</h1>
     <p class="title">You are now logged in as an admin.</p>
 
     <!-- File Upload Form -->
@@ -44,7 +55,9 @@ if (!isset($_SESSION['username'])) {
                 <span class="iconx">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
                         <path fill="none" d="M0 0h24v24H0z"></path>
-                        <path fill="currentColor" d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"></path>
+                        <path fill="currentColor"
+                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z">
+                        </path>
                     </svg>
                 </span>
             </button>
@@ -64,14 +77,9 @@ if (!isset($_SESSION['username'])) {
             <button class="action-button-upload" id="uploadAllButton">
                 Upload All
                 <div class="icon">
-                    <svg
-                        height="24"
-                        width="24"
-                        viewBox="0 0 24 24"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg height="24" width="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path d="M0 0h24v24H0z" fill="none"></path>
-                        <path
-                            d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
+                        <path d="M16.172 11l-5.364-5.364 1.414-1.414L20 12l-7.778 7.778-1.414-1.414L16.172 13H4v-2z"
                             fill="currentColor"></path>
                     </svg>
                 </div>
@@ -80,7 +88,7 @@ if (!isset($_SESSION['username'])) {
         </div>
     </div>
 
-    <?php include '../php/templates/footer.php'; ?>
+    <div id="footer-placeholder"></div>
 </body>
 
 </html>

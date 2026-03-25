@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Gallery</title>
+    <link rel="stylesheet" href="../css/portfolio.css">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script src="../js/firebase-config.js"></script>
+    <script src="../js/main.js" defer></script>
+    <script src="../js/portfolio.js" defer></script>
+    <script src="../js/dark_mode.js" defer></script>
+</head>
+
+<body>
+    <div id="header-placeholder"></div>
+
+    <main>
+        <section class="gallery">
+            <h1>My Photography Gallery</h1>
+            <div class="gallery-grid" id="gallery-grid">
+                <!-- Photos will be loaded here via JS -->
+                <p>Loading photos...</p>
+            </div>
+        </section>
+
+        <!-- Lightbox Popup -->
+        <div id="lightbox" class="lightbox">
+            <div class="lightbox-content">
+                <div class="lightbox-left">
+                    <img id="lightbox-image" src="" alt="Selected Image" />
+                </div>
+                <div class="lightbox-right">
+                    <h3 id="lightbox-title">No Title Available</h3>
+                    <p id="lightbox-description">No description available</p>
+
+                    <div id="admin-controls" style="display: none;">
+                        <button id="edit-btn">Edit</button>
+                        <button id="delete-btn">Delete</button>
+                        <div id="edit-controls" style="display: none;">
+                            <input type="text" id="edit-title" placeholder="Edit Title">
+                            <textarea id="edit-description" placeholder="Edit Description"></textarea>
+                            <button id="save-btn">Save</button>
+                            <button id="cancel-btn">Cancel</button>
+                        </div>
+                        <div id="lightbox-message" style="margin-top: 10px; font-size: 14px;"></div>
+                    </div>
+
+                    <button id="download-btn">Download</button>
+                </div>
+                <div class="close-btn">&times;</div>
+            </div>
+        </div>
+    </main>
+
+    <div id="footer-placeholder"></div>
+</body>
+
+</html>
